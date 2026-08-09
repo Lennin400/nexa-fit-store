@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a25cf5"/><stop offset="1" stop-color="#5b2195"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="22" stdDeviation="24" flood-opacity=".17"/></filter></defs>
+<rect width="700" height="700" fill="#efefec"/>
+<g filter="url(#s)"><path d="M250 145h200l30 460-105 10-25-315-25 315-105-10z" fill="url(#g)"/><rect x="238" y="130" width="224" height="64" rx="25" fill="#61279e"/><path d="M350 195v410" stroke="#8e4bc7" stroke-width="6"/><text x="350" y="245" text-anchor="middle" fill="#fff" font-family="Arial" font-size="31" font-weight="900">NEXA</text></g>
+</svg>

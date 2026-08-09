@@ -40,6 +40,7 @@ const CATALOG = {
 
 // Middlewares
 app.use(express.json({ limit: "150kb" }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname)));
 
 // Función para cargar órdenes desde orders.json

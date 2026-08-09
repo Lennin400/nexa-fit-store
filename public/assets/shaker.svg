@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7ff3f"/><stop offset="1" stop-color="#88b800"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-opacity=".18"/></filter></defs>
+<rect width="700" height="700" fill="#f0f1ec"/>
+<ellipse cx="350" cy="610" rx="125" ry="28" fill="#111" opacity=".11"/>
+<g filter="url(#s)"><path d="M245 225h210l-34 350H279z" fill="url(#g)"/><rect x="235" y="165" width="230" height="85" rx="28" fill="#111"/><rect x="400" y="120" width="70" height="85" rx="18" fill="#111" transform="rotate(18 435 162)"/><text x="350" y="405" text-anchor="middle" fill="#111" font-family="Arial" font-size="44" font-weight="900">NEXA</text></g>
+</svg>
