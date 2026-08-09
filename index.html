@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEXA FIT — Tienda oficial de ropa técnica de gimnasio y suplementación de alto rendimiento. Envíos a todo el Perú con pago 100% seguro.">
+  <title>NEXA FIT · Ropa Deportiva y Suplementos de Alto Rendimiento</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900;950&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Canvas para animación de confeti en compras exitosas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Barra de Anuncios -->
+  <div class="announcement">
+    <span>
+      <span class="announcement-dot"></span>
+      ENVÍOS A TODO EL PERÚ E INTERNACIONALES 🌎 · ENVÍO GRATIS NACIONAL DESDE S/ 199 · CAMBIOS HASTA 15 DÍAS
+    </span>
+  </div>
+
+  <!-- Header Principal -->
+  <header class="site-header">
+    <div class="nav container">
+      <div class="nav-left">
+        <button class="menu-button" id="menuButton" aria-label="Abrir menú interactivo" title="Abrir catálogo y marcas">
+          <span class="menu-btn-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="menu-btn-text">MENÚ</span>
+        </button>
+
+        <a href="#" class="brand" aria-label="Inicio NEXA FIT">
+          <span class="brand-word">NEXA</span>
+          <span class="brand-sub">FIT</span>
+        </a>
+      </div>
+
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a href="#shop" data-filter-link="todos" class="nav-item-link">TODOS</a>
+
+        <!-- Dropdown Ropa de Gym -->
+        <div class="nav-dropdown-wrap">
+          <a href="#shop" data-filter-link="ropa" class="nav-item-link has-dropdown">
+            ROPA DE GYM <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="nav-mega-menu">
+            <div class="mega-inner">
+              <div class="mega-column">
+                <span class="mega-col-title">CATEGORÍAS DE ROPA</span>
+                <a href="#shop" data-search-keyword="hoodie" data-filter-link="ropa" class="mega-link">
+                  <span class="mega-link-icon">🧥</span>
+                  <div class="mega-link-text">
+                    <strong>Oversized Hoodies</strong>
+                    <small>Algodón 420 GSM para pump</small>
+                  </div>
+                  <span class="mega-badge hot">HOT</span>
+                </a>
+                <a href="#shop" data-search-keyword="stringer" data-filter-link="ropa" class="mega-link">
+                  <span class="mega-link-icon">🎽</span>
+                  <div class="mega-link-text">
+                    <strong>Gymshark Stringers</strong>
+                    <small>Corte profundo sin costuras</small>
+                  </div>
+                </a>
+                <a href="#shop" data-search-keyword="shorts" data-filter-link="ropa" class="mega-link">
+                  <span class="mega-link-icon">🩳</span>
+                  <div class="mega-link-text">
+                    <strong>Shorts 2-en-1 Pro</strong>
+                    <small>Con forro interno de compresión</small>
+                  </div>
+                  <span class="mega-badge new">NUEVO</span>
+                </a>
+                <a href="#shop" data-search-keyword="leggings" data-filter-link="ropa" class="mega-link">
+                  <span class="mega-link-icon">🏃</span>
+                  <div class="mega-link-text">
+                    <strong>Seamless Sculpt Leggings</strong>
+                    <small>Pretina alta moldeadora</small>
+                  </div>
+                </a>
+                <a href="#shop" data-search-keyword="pump" data-filter-link="ropa" class="mega-link">
+                  <span class="mega-link-icon">🔥</span>
+                  <div class="mega-link-text">
+                    <strong>YoungLA Pump Covers</strong>
+                    <small>Vintage acid wash pesado</small>
+                  </div>
+                </a>
+                <a href="#shop" data-filter-link="ropa" class="mega-view-all">Ver toda la ropa técnica (8 modelos) →</a>
+              </div>
+              <div class="mega-column mega-featured-card">
+                <div class="mega-card-img-wrap">
+                  <img src="assets/youngla-pump-cover.png" alt="YoungLA Immortal Pump Cover">
+                </div>
+                <div class="mega-card-info">
+                  <span class="mega-card-tag">DESTACADO ROPA</span>
+                  <strong>YoungLA Acid Pump Cover</strong>
+                  <span class="mega-card-price">S/ 129.90</span>
+                  <button class="mega-card-btn" data-add-id="youngla-pump-cover">+ Añadir a Bolsa</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dropdown Suplementos -->
+        <div class="nav-dropdown-wrap">
+          <a href="#shop" data-filter-link="suplementos" class="nav-item-link has-dropdown">
+            SUPLEMENTOS <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="nav-mega-menu">
+            <div class="mega-inner">
+              <div class="mega-column">
+                <span class="mega-col-title">NUTRICIÓN DE ALTO RENDIMIENTO</span>
+                <a href="#shop" data-search-keyword="whey" data-filter-link="suplementos" class="mega-link">
+                  <span class="mega-link-icon">🥛</span>
+                  <div class="mega-link-text">
+                    <strong>Proteínas Whey Isolate</strong>
+                    <small>ON Gold Standard & Nexa Pro</small>
+                  </div>
+                  <span class="mega-badge hot">Nº1</span>
+                </a>
+                <a href="#shop" data-search-keyword="creatina" data-filter-link="suplementos" class="mega-link">
+                  <span class="mega-link-icon">⚡</span>
+                  <div class="mega-link-text">
+                    <strong>Creatina Micronizada</strong>
+                    <small>100% Pura sin sabor</small>
+                  </div>
+                  <span class="mega-badge pure">100% PURA</span>
+                </a>
+                <a href="#shop" data-search-keyword="c4" data-filter-link="suplementos" class="mega-link">
+                  <span class="mega-link-icon">💥</span>
+                  <div class="mega-link-text">
+                    <strong>Cellucor C4 Pre-Workout</strong>
+                    <small>Energía explosiva 60 servicios</small>
+                  </div>
+                </a>
+                <a href="#shop" data-search-keyword="animal" data-filter-link="suplementos" class="mega-link">
+                  <span class="mega-link-icon">🛡️</span>
+                  <div class="mega-link-text">
+                    <strong>Animal Pak Hardcore</strong>
+                    <small>44 packs multivitamínicos</small>
+                  </div>
+                </a>
+                <a href="#shop" data-search-keyword="dymatize" data-filter-link="suplementos" class="mega-link">
+                  <span class="mega-link-icon">🏆</span>
+                  <div class="mega-link-text">
+                    <strong>Dymatize ISO 100</strong>
+                    <small>Hidrolizada ultra rápida</small>
+                  </div>
+                </a>
+                <a href="#shop" data-filter-link="suplementos" class="mega-view-all">Ver todos los suplementos (8 productos) →</a>
+              </div>
+              <div class="mega-column mega-featured-card">
+                <div class="mega-card-img-wrap">
+                  <img src="assets/on-gold-whey.png" alt="ON Gold Standard Whey">
+                </div>
+                <div class="mega-card-info">
+                  <span class="mega-card-tag">TOP SUPLEMENTO</span>
+                  <strong>Optimum Nutrition Gold 5 lbs</strong>
+                  <span class="mega-card-price">S/ 249.90</span>
+                  <button class="mega-card-btn" data-add-id="on-gold-whey">+ Añadir a Bolsa</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#collections" class="nav-item-link">COLECCIÓN 2026</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="searchToggle" class="icon-button" aria-label="Buscar" title="Buscar productos">⌕</button>
+        <button id="trackOrderNavBtn" class="track-btn" title="Rastrear estado de tu pedido">
+          <span>📦</span> <span class="track-btn-text">Rastrear Pedido</span>
+        </button>
+        <button id="cartButton" class="cart-button" aria-label="Abrir bolsa de compra">
+          BOLSA <span id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra de Búsqueda Global Desplegable -->
+    <div class="search-bar" id="searchBar">
+      <div class="container search-inner">
+        <span>⌕</span>
+        <input id="globalSearch" type="search" placeholder="Buscar por nombre, proteína, creatina, shorts, polerón...">
+        <button id="closeSearch" aria-label="Cerrar búsqueda">×</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Drawer de Navegación Profesional NEXA FIT -->
+  <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <!-- Header del Drawer -->
+    <div class="drawer-header">
+      <div class="drawer-brand-wrap">
+        <a href="#" class="brand drawer-brand" aria-label="Inicio NEXA FIT">
+          <span class="brand-word">NEXA</span>
+          <span class="brand-sub">FIT</span>
+        </a>
+        <div class="drawer-live-badge">
+          <span class="live-dot"></span>
+          <span>SEASON 2026</span>
+        </div>
+      </div>
+      <button id="closeMenu" class="drawer-close-btn" aria-label="Cerrar menú" title="Cerrar menú">×</button>
+    </div>
+
+    <!-- Buscador Rápido en Drawer -->
+    <div class="drawer-search-wrap">
+      <div class="drawer-search-box">
+        <span class="drawer-search-icon">⌕</span>
+        <input type="text" id="drawerSearchInput" placeholder="Buscar en catálogo..." aria-label="Buscar en catálogo">
+        <button id="drawerClearSearch" class="drawer-search-clear" aria-label="Limpiar búsqueda" style="display: none;">×</button>
+      </div>
+    </div>
+
+    <!-- Segmented Control / Tabs del Drawer -->
+    <div class="drawer-tabs" role="tablist">
+      <button class="drawer-tab active" data-drawer-tab="categories" role="tab" aria-selected="true">
+        <span>⚡ Categorías</span>
+      </button>
+      <button class="drawer-tab" data-drawer-tab="brands" role="tab" aria-selected="false">
+        <span>🏆 Marcas</span>
+      </button>
+      <button class="drawer-tab" data-drawer-tab="featured" role="tab" aria-selected="false">
+        <span>🔥 Destacados</span>
+      </button>
+    </div>
+
+    <!-- Cuerpo del Drawer con Scroll -->
+    <div class="drawer-scrollable">
+      <!-- PANEL 1: CATEGORÍAS -->
+      <div class="drawer-panel active" id="drawerPanelCategories">
+        <!-- Tarjeta Principal: Todos los productos -->
+        <a href="#shop" class="drawer-cat-hero" data-filter-link="todos">
+          <div class="cat-hero-left">
+            <span class="cat-hero-tag">CATÁLOGO COMPLETO</span>
+            <h3>Explorar Todos los Productos</h3>
+            <span class="cat-hero-count">16 Artículos Disponibles</span>
+          </div>
+          <div class="cat-hero-arrow">→</div>
+        </a>
+
+        <!-- Categoría 1: Ropa Técnica de Gimnasio -->
+        <div class="drawer-cat-group">
+          <div class="drawer-cat-head">
+            <div class="cat-head-info">
+              <span class="cat-icon-badge">👕</span>
+              <div>
+                <h4>Ropa de Gimnasio</h4>
+                <p>Textiles técnicos y corte atlético</p>
+              </div>
+            </div>
+            <a href="#shop" class="cat-view-all" data-filter-link="ropa">Ver Todo (8) →</a>
+          </div>
+          <div class="drawer-sublinks-grid">
+            <a href="#shop" class="drawer-subchip" data-search-keyword="hoodie" data-filter-link="ropa">
+              <span class="subchip-title"><span class="subchip-dot"></span> Oversized Hoodies 420 GSM</span>
+              <span class="subchip-badge">HOT</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="stringer" data-filter-link="ropa">
+              <span class="subchip-title"><span class="subchip-dot"></span> Gymshark Stringers & Tanques</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="shorts" data-filter-link="ropa">
+              <span class="subchip-title"><span class="subchip-dot"></span> Shorts 2-en-1 Nike & Nexa</span>
+              <span class="subchip-badge new">NUEVO</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="leggings" data-filter-link="ropa">
+              <span class="subchip-title"><span class="subchip-dot"></span> Seamless Sculpt Leggings</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="pump" data-filter-link="ropa">
+              <span class="subchip-title"><span class="subchip-dot"></span> YoungLA Pump Covers Vintage</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="essential" data-filter-link="ropa">
+              <span class="subchip-title"><span class="subchip-dot"></span> Essential Athletic Tees</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Categoría 2: Suplementación Deportiva -->
+        <div class="drawer-cat-group">
+          <div class="drawer-cat-head">
+            <div class="cat-head-info">
+              <span class="cat-icon-badge">⚡</span>
+              <div>
+                <h4>Suplementación Pro</h4>
+                <p>Absorción rápida y pureza máxima</p>
+              </div>
+            </div>
+            <a href="#shop" class="cat-view-all" data-filter-link="suplementos">Ver Todo (8) →</a>
+          </div>
+          <div class="drawer-sublinks-grid">
+            <a href="#shop" class="drawer-subchip" data-search-keyword="whey" data-filter-link="suplementos">
+              <span class="subchip-title"><span class="subchip-dot"></span> Proteínas Whey Isolate & Hydro</span>
+              <span class="subchip-badge">TOP</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="creatina" data-filter-link="suplementos">
+              <span class="subchip-title"><span class="subchip-dot"></span> Creatina Monohidratada 100%</span>
+              <span class="subchip-badge pure">PURA</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="c4" data-filter-link="suplementos">
+              <span class="subchip-title"><span class="subchip-dot"></span> Pre-Entrenos Explosivos (C4)</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="animal" data-filter-link="suplementos">
+              <span class="subchip-title"><span class="subchip-dot"></span> Animal Pak Multivitamínico</span>
+            </a>
+            <a href="#shop" data-search-keyword="iso 100" data-filter-link="suplementos">
+              <span class="subchip-title"><span class="subchip-dot"></span> Dymatize ISO 100 Hidrolizada</span>
+            </a>
+            <a href="#shop" class="drawer-subchip" data-search-keyword="shaker" data-filter-link="suplementos">
+              <span class="subchip-title"><span class="subchip-dot"></span> Shakers Performance 700ml</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Categoría 3: Colección Performance 2026 -->
+        <div class="drawer-promo-card">
+          <div class="promo-card-content">
+            <span class="promo-pill">✨ DROP EXCLUSIVO</span>
+            <h4>Colección Performance 2026</h4>
+            <p>Diseñada para romper tus marcas personales en cada entrenamiento.</p>
+            <a href="#collections" class="promo-card-btn">Ver Colección 2026 →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: MARCAS TOP -->
+      <div class="drawer-panel" id="drawerPanelBrands">
+        <div class="drawer-brands-intro">
+          <p>Filtra por marca oficial garantizada:</p>
+        </div>
+        <div class="drawer-brands-grid">
+          <button class="drawer-brand-card" data-brand="Optimum Nutrition">
+            <span class="brand-badge-logo">ON</span>
+            <div class="brand-card-text">
+              <strong>Optimum Nutrition</strong>
+              <small>Gold Standard Whey #1</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="Dymatize">
+            <span class="brand-badge-logo">DYM</span>
+            <div class="brand-card-text">
+              <strong>Dymatize Nutrition</strong>
+              <small>ISO 100 Hydrolyzed</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="Gymshark">
+            <span class="brand-badge-logo">GS</span>
+            <div class="brand-card-text">
+              <strong>Gymshark</strong>
+              <small>Onyx Seamless & Stringers</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="YoungLA">
+            <span class="brand-badge-logo">YLA</span>
+            <div class="brand-card-text">
+              <strong>YoungLA Streetwear</strong>
+              <small>Immortal Pump Covers</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="Cellucor">
+            <span class="brand-badge-logo">C4</span>
+            <div class="brand-card-text">
+              <strong>Cellucor C4</strong>
+              <small>Pre-Workout Explosivo</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="Universal Nutrition">
+            <span class="brand-badge-logo">PAK</span>
+            <div class="brand-card-text">
+              <strong>Universal Nutrition</strong>
+              <small>Animal Pak Legendario</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="Nike Pro">
+            <span class="brand-badge-logo">NK</span>
+            <div class="brand-card-text">
+              <strong>Nike Pro</strong>
+              <small>Dri-FIT Flex Shorts 2-in-1</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card" data-brand="Lululemon">
+            <span class="brand-badge-logo">LL</span>
+            <div class="brand-card-text">
+              <strong>Lululemon</strong>
+              <small>Align Sculpt High-Rise</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+
+          <button class="drawer-brand-card active-nexa" data-brand="NEXA FIT">
+            <span class="brand-badge-logo nexa-badge">NF</span>
+            <div class="brand-card-text">
+              <strong>NEXA FIT Originals</strong>
+              <small>Fórmulas Pro & Ropa Técnica</small>
+            </div>
+            <span class="brand-arrow">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL 3: DESTACADOS & FLASH SALE -->
+      <div class="drawer-panel" id="drawerPanelFeatured">
+        <div class="drawer-featured-intro">
+          <span class="flash-tag">⚡ TOP VENTAS DE LA SEMANA</span>
+          <p>Los suplementos y prendas más pedidos:</p>
+        </div>
+        <div class="drawer-mini-products">
+          <div class="drawer-mini-item">
+            <img src="assets/on-gold-whey.png" alt="ON Gold Standard Whey" class="mini-prod-img">
+            <div class="mini-prod-info">
+              <span class="mini-prod-brand">OPTIMUM NUTRITION</span>
+              <strong>Gold Standard 100% Whey</strong>
+              <span class="mini-prod-price">S/ 249.90</span>
+            </div>
+            <button class="mini-add-btn" data-add-id="on-gold-whey" title="Añadir a bolsa">+ BOLSA</button>
+          </div>
+
+          <div class="drawer-mini-item">
+            <img src="assets/youngla-pump-cover.png" alt="YoungLA Pump Cover" class="mini-prod-img">
+            <div class="mini-prod-info">
+              <span class="mini-prod-brand">YOUNGLA</span>
+              <strong>Immortal Pump Cover</strong>
+              <span class="mini-prod-price">S/ 129.90</span>
+            </div>
+            <button class="mini-add-btn" data-add-id="youngla-pump-cover" title="Añadir a bolsa">+ BOLSA</button>
+          </div>
+
+          <div class="drawer-mini-item">
+            <img src="assets/creatine.png" alt="NEXA Creatina Pura" class="mini-prod-img">
+            <div class="mini-prod-info">
+              <span class="mini-prod-brand">NEXA FIT</span>
+              <strong>Creatina Monohidratada 300g</strong>
+              <span class="mini-prod-price">S/ 89.90</span>
+            </div>
+            <button class="mini-add-btn" data-add-id="creatine" title="Añadir a bolsa">+ BOLSA</button>
+          </div>
+
+          <div class="drawer-mini-item">
+            <img src="assets/gymshark-stringer.png" alt="Gymshark Stringer" class="mini-prod-img">
+            <div class="mini-prod-info">
+              <span class="mini-prod-brand">GYMSHARK</span>
+              <strong>Onyx Seamless Compression</strong>
+              <span class="mini-prod-price">S/ 119.90</span>
+            </div>
+            <button class="mini-add-btn" data-add-id="gymshark-stringer" title="Añadir a bolsa">+ BOLSA</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer del Drawer -->
+    <div class="drawer-footer">
+      <!-- Cupón Interactivo -->
+      <div class="drawer-coupon-box">
+        <div class="coupon-left">
+          <span class="coupon-icon">🎟️</span>
+          <div>
+            <strong>20% DE DESCUENTO</strong>
+            <small>Código: <span class="coupon-code-pill">NEXAFIT20</span></small>
+          </div>
+        </div>
+        <button id="drawerCopyCoupon" class="drawer-copy-coupon-btn" title="Copiar código de descuento">
+          Copiar
+        </button>
+      </div>
+
+      <!-- Acciones de Soporte y Rastreo -->
+      <div class="drawer-actions-row">
+        <button id="mobileTrackBtn" class="drawer-action-btn track-action">
+          <span>📦</span>
+          <span>Rastrear Pedido</span>
+        </button>
+        <a href="https://wa.me/51999999999?text=Hola%20NEXA%20FIT%2C%20quisiera%20asesor%C3%ADa%20sobre%20los%20productos" target="_blank" rel="noopener noreferrer" class="drawer-action-btn ws-action">
+          <span>💬</span>
+          <span>Asesoría WhatsApp</span>
+        </a>
+      </div>
+
+      <!-- Garantías Rápidas -->
+      <div class="drawer-perks">
+        <span>🇵🇪 Envíos Nacionales e Internacionales 🌎</span>
+        <span>·</span>
+        <span>🔒 Pago 100% Seguro</span>
+        <span>·</span>
+        <span>🔄 Cambios 15 días</span>
+      </div>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal-item">
+          <p class="eyebrow">COLECCIÓN PERFORMANCE 2026</p>
+          <h1>ENTRENA<br>MÁS FUERTE.</h1>
+          <p class="hero-text">
+            Prendas técnicas con ajuste atlético y suplementos de máxima pureza formulados para superar tus límites en cada repetición.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#shop" data-filter-link="ropa">COMPRAR ROPA</a>
+            <a class="button button-light" href="#shop" data-filter-link="suplementos">VER SUPLEMENTOS</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-item" aria-hidden="true">
+          <div class="hero-athlete-wrapper">
+            <img src="assets/hero-athlete.png" alt="Atleta NEXA FIT entrenando" class="hero-athlete-img">
+          </div>
+          <span class="hero-outline-text">NEXA</span>
+          <div class="hero-badge-floating">
+            <strong>✓ CALIDAD CERTIFICADA</strong>
+            <span>Sin rellenos · 100% Ultrafiltrado</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Strip -->
+    <section class="category-strip">
+      <a href="#shop" data-filter-link="ropa" class="reveal-item">
+        <span>01 / ROPA TÉCNICA</span>
+        <strong>ROPA PARA ENTRENAR</strong>
+        <small>Telas elásticas anti-sudor y costuras reforzadas</small>
+      </a>
+      <a href="#shop" data-filter-link="suplementos" class="reveal-item">
+        <span>02 / NUTRICIÓN AVANZADA</span>
+        <strong>SUPLEMENTACIÓN</strong>
+        <small>Fórmulas de rápida asimilación sin aditivos</small>
+      </a>
+      <a href="#collections" class="reveal-item">
+        <span>03 / EDICIÓN LIMITADA</span>
+        <strong>NUEVAS COLECCIONES</strong>
+        <small>Lanzamientos exclusivos de alto rendimiento</small>
+      </a>
+    </section>
+
+    <!-- Sección de Catálogo / Tienda -->
+    <section class="shop-section container" id="shop">
+      <div class="section-head reveal-item">
+        <div>
+          <p class="eyebrow">CATÁLOGO OFICIAL</p>
+          <h2>LOS MÁS BUSCADOS</h2>
+        </div>
+
+        <div class="shop-controls">
+          <button class="filter-chip active" data-filter="todos">TODOS</button>
+          <button class="filter-chip" data-filter="ropa">ROPA</button>
+          <button class="filter-chip" data-filter="suplementos">SUPLEMENTOS</button>
+          
+          <select id="sortSelect" class="sort-select" aria-label="Ordenar productos">
+            <option value="featured">Destacados</option>
+            <option value="price-asc">Precio: Menor a Mayor</option>
+            <option value="price-desc">Precio: Mayor a Menor</option>
+            <option value="name-asc">Nombre: A - Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <!-- Propuestas de Valor -->
+    <section class="value-props-section container">
+      <div class="props-grid">
+        <div class="prop-card reveal-item">
+          <div class="prop-icon">⚡</div>
+          <div>
+            <h4>ENVÍOS PERÚ & INTERNACIONALES</h4>
+            <p>Despacho veloz en Lima (24h), a todo el Perú y envíos internacionales a todo el mundo con tracking en tiempo real.</p>
+          </div>
+        </div>
+        <div class="prop-card reveal-item">
+          <div class="prop-icon">🛡️</div>
+          <div>
+            <h4>PUREZA Y CALIDAD 100%</h4>
+            <p>Materias primas de grado farmacéutico y textiles elásticos que no se transparentan.</p>
+          </div>
+        </div>
+        <div class="prop-card reveal-item">
+          <div class="prop-icon">💳</div>
+          <div>
+            <h4>PAGO SEGURO ENCRIPTADO</h4>
+            <p>Transacciones protegidas con validación biométrica y confirmación instantánea.</p>
+          </div>
+        </div>
+        <div class="prop-card reveal-item">
+          <div class="prop-icon">🔄</div>
+          <div>
+            <h4>CAMBIOS SIN COMPLICACIONES</h4>
+            <p>15 días de garantía para cambios de talla o producto con atención personalizada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner Cinematográfico -->
+    <section class="cinematic-banner container" id="collections">
+      <img src="assets/banner-bg.png" alt="Atleta NEXA FIT en gimnasio" class="banner-bg-img">
+      <div class="banner-overlay"></div>
+      <div class="banner-text-content reveal-item">
+        <span class="banner-tag">MÁS DE <span data-counter="10000">10,000</span> ATLETAS ACTIVOS</span>
+        <h2>SIN EXCUSAS.<br>SOLO RESULTADOS.</h2>
+        <p>Prendas diseñadas para aguantar las cargas más pesadas y fórmulas nutricionales diseñadas para acelerar tu recuperación muscular.</p>
+        <div>
+          <a href="#shop" class="button button-lime" data-filter-link="todos">EXPLORAR TODO EL CATÁLOGO</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reseñas de Atletas -->
+    <section class="reviews-section container">
+      <div class="section-head text-center reveal-item" style="justify-content: center; text-align: center; flex-direction: column; align-items: center;">
+        <p class="eyebrow">COMUNIDAD NEXA FIT</p>
+        <h2>LO QUE DICEN NUESTROS ATLETAS</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card reveal-item">
+          <div class="stars">★★★★★</div>
+          <p>"La proteína de chocolate es extraordinaria, disolución instantánea sin grumos y sabor increíble. Llegó al día siguiente a San Isidro."</p>
+          <div class="reviewer">
+            <strong>Mateo R.</strong>
+            <span>Compró: Whey Pro + Creatina 100% Pura</span>
+          </div>
+        </div>
+
+        <div class="review-card reveal-item">
+          <div class="stars">★★★★★</div>
+          <p>"Los leggings Seamless son los mejores que he tenido: pretina alta que no se baja y tela cero transparente en sentadilla pesada."</p>
+          <div class="reviewer">
+            <strong>Valeria G.</strong>
+            <span>Compró: Seamless Sculpt Leggings (Talla M)</span>
+          </div>
+        </div>
+
+        <div class="review-card reveal-item">
+          <div class="stars">★★★★★</div>
+          <p>"El corte atlético del polo Essential Tee resalta los hombros y brazos a la perfección. La tela es fresca y muy suave."</p>
+          <div class="reviewer">
+            <strong>Diego M.</strong>
+            <span>Compró: Essential Training Tee + Rest Day Hoodie</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col brand-col">
+        <strong class="footer-title">NEXA<span>FIT</span></strong>
+        <p>Equipamiento deportivo premium y nutrición de vanguardia para atletas que buscan superar sus récords personales.</p>
+        <div class="payment-methods-strip">
+          <span>VISA</span>
+          <span>MASTERCARD</span>
+          <span>AMEX</span>
+          <span>DINERS</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <strong>CATÁLOGO</strong>
+        <a href="#shop" data-filter-link="ropa">Ropa de gimnasio</a>
+        <a href="#shop" data-filter-link="suplementos">Suplementos deportivos</a>
+        <a href="#collections">Colección Performance 2026</a>
+      </div>
+      <div class="footer-col">
+        <strong>SOPORTE Y PEDIDOS</strong>
+        <a href="javascript:void(0)" id="footerTrackBtn">Rastrear mi pedido</a>
+        <a href="#shop">Preguntas frecuentes</a>
+        <a href="#shop">Envíos Nacionales e Internacionales</a>
+        <a href="#shop">Políticas de garantía</a>
+      </div>
+      <div class="footer-col">
+        <strong>CLUB DE ATLETAS NEXA</strong>
+        <p style="font-size: 12px; color: var(--gray-light);">Suscríbete para recibir lanzamientos de stock exclusivo y un 20% OFF con el código <strong>NEXAFIT20</strong>.</p>
+        <form class="footer-form" onsubmit="event.preventDefault(); showToast('¡Bienvenido al Club NEXA! Usa el cupón NEXAFIT20');">
+          <input type="email" placeholder="Tu correo electrónico" required>
+          <button type="submit">UNIRSE</button>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom-bar">
+      <span>© 2026 NEXA FIT · Todos los derechos reservados.</span>
+      <span>Plataforma Oficial de Compra Segura</span>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL DE VISTA RÁPIDA (QUICK VIEW)
+       ========================================================================== -->
+  <aside class="quick-view-modal" id="quickViewModal" aria-hidden="true">
+    <div class="quick-view-card">
+      <button class="icon-button" id="closeQuickView" style="position: absolute; top: 16px; right: 16px;">×</button>
+      <div class="quick-view-media">
+        <img id="quickViewImg" src="" alt="">
+      </div>
+      <div class="quick-view-content">
+        <span class="eyebrow" id="quickViewCategory">CATEGORÍA</span>
+        <h2 id="quickViewTitle" style="font-size: 22px; font-weight: 950; margin-bottom: 8px;">Título</h2>
+        <p id="quickViewDesc" style="font-size: 13px; color: var(--gray); line-height: 1.5; margin-bottom: 16px;">Descripción</p>
+        <div id="quickViewPrice" style="font-size: 24px; font-weight: 950; margin-bottom: 20px;">S/ 0.00</div>
+
+        <div class="variant-selector" id="quickViewVariants">
+          <label id="variantLabel">Seleccionar Talla / Presentación:</label>
+          <div class="variant-options" id="variantOptions"></div>
+        </div>
+
+        <button id="quickViewAddBtn" class="button button-dark" style="width: 100%; margin-top: 20px;">
+          AGREGAR A LA BOLSA
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MODAL DE RASTREO DE PEDIDO (ORDER TRACKER)
+       ========================================================================== -->
+  <aside class="tracking-modal" id="trackingModal" aria-hidden="true">
+    <div class="tracking-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 20px; font-weight: 950;">📦 RASTREAR PEDIDO</h3>
+        <button id="closeTracking" class="icon-button">×</button>
+      </div>
+      <p style="font-size: 13px; color: var(--gray);">Ingresa tu código de orden oficial (ejemplo: <strong>NEXA-ABC123</strong>) para consultar el estado en tiempo real:</p>
+
+      <form class="tracking-search-form" id="trackingForm">
+        <input type="text" id="trackingInput" placeholder="NEXA-XXXXXX" required maxlength="15">
+        <button type="submit">CONSULTAR</button>
+      </form>
+
+      <div id="trackingResult" style="display: none;">
+        <div class="receipt-order-badge" style="margin-bottom: 16px;">
+          <span>ESTADO ACTUAL:</span>
+          <strong id="trackingStatusBadge" style="color: var(--success);">PAGADO Y CONFIRMADO</strong>
+        </div>
+
+        <div class="tracking-timeline" id="trackingTimeline"></div>
+
+        <div class="receipt-details" id="trackingDetailsBox"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       BOLSA LATERAL (CART DRAWER)
+       ========================================================================== -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer-head">
+      <div>
+        <p class="eyebrow" style="margin: 0;">TU BOLSA</p>
+        <h3>RESUMEN DE COMPRA</h3>
+      </div>
+      <button id="closeCart" aria-label="Cerrar bolsa">×</button>
+    </div>
+
+    <!-- Barra de progreso de envío gratis -->
+    <div class="shipping-progress">
+      <span id="shippingProgressText">Agrega S/ 199.00 más para ENVÍO GRATIS</span>
+      <div class="shipping-bar-bg">
+        <div class="shipping-bar-fill" id="shippingBarFill"></div>
+      </div>
+    </div>
+
+    <div class="cart-drawer-body" id="cartItems"></div>
+
+    <div class="cart-drawer-foot">
+      <div class="subtotal-row">
+        <span>SUBTOTAL</span>
+        <strong id="cartSubtotal">S/ 0.00</strong>
+      </div>
+      <p style="font-size: 11px; color: var(--gray); margin-bottom: 14px;">Impuestos incluidos. El costo de envío se confirmará al pagar.</p>
+      <button id="checkoutButton" class="checkout-button">
+        FINALIZAR COMPRA
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MODAL DE CHECKOUT & TARJETA 3D
+       ========================================================================== -->
+  <section class="checkout-modal" id="checkoutModal" aria-hidden="true">
+    <div class="checkout-panel-wide">
+      <div class="checkout-head">
+        <div>
+          <p class="eyebrow">PASARELA DIRECTA Y SEGURA</p>
+          <h2>FINALIZAR TU COMPRA</h2>
+        </div>
+        <button id="closeCheckout" aria-label="Cerrar checkout">×</button>
+      </div>
+
+      <form id="checkoutForm" class="billing-checkout" novalidate>
+        <!-- Columna Izquierda: Datos de Facturación y Envío -->
+        <section class="billing-column">
+          <div class="coupon-banner">
+            <span>¿Tienes un cupón de descuento?</span>
+            <button type="button" id="couponToggle">Ingresar código</button>
+          </div>
+
+          <div class="coupon-box" id="couponBox">
+            <input type="text" id="couponInput" placeholder="Ingresa ej. NEXAFIT20">
+            <button type="button" id="applyCoupon">APLICAR</button>
+          </div>
+
+          <h3>DATOS DE ENVÍO Y CONTACTO</h3>
+
+          <div class="field-grid two">
+            <label>
+              Nombre <em>*</em>
+              <input type="text" name="firstName" required autocomplete="given-name" placeholder="Ej. Mateo">
+            </label>
+            <label>
+              Apellido <em>*</em>
+              <input type="text" name="lastName" required autocomplete="family-name" placeholder="Ej. Rodríguez">
+            </label>
+          </div>
+
+          <label>
+            DNI / Documento de Identidad <em>*</em>
+            <input
+              type="text"
+              name="document"
+              required
+              inputmode="numeric"
+              maxlength="12"
+              placeholder="Número de DNI o RUC"
+              autocomplete="off"
+            >
+          </label>
+
+          <div class="field-grid two">
+            <label>
+              País de Destino <em>*</em>
+              <select name="country" id="checkoutCountry" required>
+                <option value="PE" selected>🇵🇪 Perú (Nacional)</option>
+                <option value="US">🇺🇸 Estados Unidos</option>
+                <option value="MX">🇲🇽 México</option>
+                <option value="CL">🇨🇱 Chile</option>
+                <option value="CO">🇨🇴 Colombia</option>
+                <option value="ES">🇪🇸 España</option>
+                <option value="AR">🇦🇷 Argentina</option>
+                <option value="INT">🌎 Otro País (Internacional)</option>
+              </select>
+            </label>
+
+            <label>
+              Región / Estado / Dpto <em>*</em>
+              <select name="region" required>
+                <option value="Lima" selected>Lima (Perú)</option>
+                <option value="Arequipa">Arequipa</option>
+                <option value="Cusco">Cusco</option>
+                <option value="La Libertad">La Libertad</option>
+                <option value="Piura">Piura</option>
+                <option value="Lambayeque">Lambayeque</option>
+                <option value="Junín">Junín</option>
+                <option value="Áncash">Áncash</option>
+                <option value="Ica">Ica</option>
+                <option value="Tacna">Tacna</option>
+                <option value="San Martín">San Martín</option>
+                <option value="Callao">Callao</option>
+                <option value="Otras Regiones / Internacional">Otras Regiones / Internacional</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Ciudad / Distrito / Código Postal <em>*</em>
+            <input type="text" name="city" required placeholder="Ej. Miraflores / Miami / Madrid / C.P. 15074" autocomplete="address-level2">
+          </label>
+
+          <label>
+            Dirección de Entrega <em>*</em>
+            <input
+              type="text"
+              name="address"
+              required
+              placeholder="Av. Pardo 450 / Calle Los Álamos 123"
+              autocomplete="street-address"
+            >
+          </label>
+
+          <label>
+            Apartamento, Dpto, Referencia <span>(opcional)</span>
+            <input type="text" name="apartment" placeholder="Dpto 502 / Condominio Puerta 3" autocomplete="address-line2">
+          </label>
+
+          <div class="field-grid two">
+            <label>
+              Teléfono Celular (WhatsApp) <em>*</em>
+              <input type="tel" name="phone" required placeholder="987654321" autocomplete="tel">
+            </label>
+
+            <label>
+              Correo Electrónico <em>*</em>
+              <input type="email" name="email" required placeholder="tuemail@ejemplo.com" autocomplete="email">
+            </label>
+          </div>
+
+          <label>
+            Instrucciones para el Repartidor <span>(opcional)</span>
+            <textarea
+              name="notes"
+              rows="2"
+              placeholder="Ej. Dejar en recepción si no contesto el timbre..."
+            ></textarea>
+          </label>
+        </section>
+
+        <!-- Columna Derecha: Resumen de Pedido y Tarjeta 3D -->
+        <aside class="payment-column">
+          <div class="order-payment-card">
+            <h3>RESUMEN DE TU PEDIDO</h3>
+
+            <div class="order-table-head">
+              <span>Producto</span>
+              <span>Subtotal</span>
+            </div>
+
+            <div id="checkoutItems" class="payment-order-items"></div>
+
+            <div class="payment-totals">
+              <div><span>Subtotal</span><strong id="checkoutSubtotal">S/ 0.00</strong></div>
+              <div id="checkoutDiscountRow" style="display: none; color: var(--success);">
+                <span>Descuento Cupón</span><strong id="checkoutDiscount">-S/ 0.00</strong>
+              </div>
+              <div><span>Envío</span><strong id="checkoutShipping">S/ 0.00</strong></div>
+              <div class="grand-total">
+                <span>Total a Pagar</span>
+                <strong id="checkoutGrandTotal">S/ 0.00</strong>
+              </div>
+            </div>
+
+            <!-- TARJETA VIRTUAL INTERACTIVA 3D CON EFECTO DE BRILLO -->
+            <div class="interactive-card-wrapper">
+              <div class="interactive-card" id="creditCard3D">
+                <!-- Frente de la tarjeta -->
+                <div class="card-face card-front">
+                  <div class="card-shine"></div>
+                  <div class="card-top">
+                    <div class="card-chip"></div>
+                    <span class="card-brand-display" id="cardBrandDisplay">VISA</span>
+                  </div>
+                  <div class="card-number-display" id="cardNumberDisplay">•••• •••• •••• ••••</div>
+                  <div class="card-bottom">
+                    <div>
+                      <span class="card-label-small">TITULAR DE LA TARJETA</span>
+                      <strong class="card-holder-display" id="cardHolderDisplay">NOMBRE Y APELLIDO</strong>
+                    </div>
+                    <div>
+                      <span class="card-label-small">VENCE</span>
+                      <strong class="card-expiry-display" id="cardExpiryDisplay">MM/YY</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Reverso de la tarjeta -->
+                <div class="card-face card-back">
+                  <div class="card-stripe"></div>
+                  <div class="card-cvv-box">
+                    <span class="card-label-small">CVC / CVV</span>
+                    <div class="cvv-strip" id="cardCvvDisplay">•••</div>
+                  </div>
+                  <div class="card-back-branding">NEXA FIT · SECURE PAYMENT</div>
+                </div>
+              </div>
+            </div>
+
+            <h4 style="font-size: 13px; font-weight: 900; margin-bottom: 12px;">DATOS DE TU TARJETA DE CRÉDITO O DÉBITO</h4>
+
+            <label>
+              Número de Tarjeta <em>*</em>
+              <div class="input-with-badge">
+                <input
+                  type="text"
+                  id="cardNumberInput"
+                  name="cardNumber"
+                  required
+                  inputmode="numeric"
+                  maxlength="19"
+                  placeholder="0000 0000 0000 0000"
+                  autocomplete="cc-number"
+                >
+                <span class="card-brand-badge" id="cardBrandBadge">VISA</span>
+              </div>
+            </label>
+
+            <label>
+              Nombre del Titular <em>*</em>
+              <input
+                type="text"
+                id="cardholderName"
+                name="cardholderName"
+                required
+                placeholder="Como aparece impreso en la tarjeta"
+                autocomplete="cc-name"
+              >
+            </label>
+
+            <div class="field-grid two">
+              <label>
+                Vencimiento <em>*</em>
+                <input
+                  type="text"
+                  id="cardExpiryInput"
+                  name="cardExpiry"
+                  required
+                  inputmode="numeric"
+                  maxlength="5"
+                  placeholder="MM/YY"
+                  autocomplete="cc-exp"
+                >
+              </label>
+
+              <label>
+                Código CVV / CVC <em>*</em>
+                <input
+                  type="password"
+                  id="cardCvcInput"
+                  name="cardCvc"
+                  required
+                  inputmode="numeric"
+                  maxlength="4"
+                  placeholder="123"
+                  autocomplete="cc-csc"
+                >
+              </label>
+            </div>
+
+            <label>
+              Cuotas
+              <select name="installments" id="installmentsSelect">
+                <option value="1">1 cuota (Directo sin intereses)</option>
+                <option value="3">3 cuotas</option>
+                <option value="6">6 cuotas</option>
+                <option value="12">12 cuotas</option>
+              </select>
+            </label>
+
+            <div class="card-error" id="cardErrors" aria-live="polite"></div>
+
+            <label class="checkout-terms">
+              <input type="checkbox" id="acceptTerms" required checked>
+              <span>Acepto las políticas de compra y entrega de NEXA FIT.</span>
+            </label>
+
+            <button class="pay-button" type="submit" id="placeOrderButton">
+              PAGAR Y CONFIRMAR · <span id="checkoutTotal">S/ 0.00</span>
+            </button>
+
+            <p class="payment-security-note">
+              🔒 Encriptación SSL de 256 bits. El pedido se procesa y registra de inmediato en la base de datos oficial.
+            </p>
+          </div>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MODAL DE CONFIRMACIÓN / COMPROBANTE DIGITAL OFICIAL
+       ========================================================================== -->
+  <section class="receipt-modal" id="receiptModal" aria-hidden="true">
+    <div class="receipt-card">
+      <div class="receipt-icon">✓</div>
+      <h2>¡PAGO REALIZADO CON ÉXITO!</h2>
+      <p class="receipt-subtitle">Tu orden ha sido registrada en el sistema de almacén.</p>
+
+      <div class="receipt-order-badge">
+        <span>CÓDIGO DE ORDEN:</span>
+        <strong id="receiptOrderId">NEXA-000000</strong>
+      </div>
+
+      <div class="receipt-details">
+        <div class="receipt-row">
+          <span>Fecha y Hora:</span>
+          <strong id="receiptDate">-</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Cliente:</span>
+          <strong id="receiptCustomerName">-</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Destino de Envío:</span>
+          <strong id="receiptAddress">-</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Método de Pago:</span>
+          <strong id="receiptPaymentMethod">-</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Código de Autorización:</span>
+          <strong id="receiptAuthCode">AUT-982144</strong>
+        </div>
+        <div class="receipt-row total-row">
+          <span>Monto Total Pagado:</span>
+          <strong id="receiptTotalAmount" style="color: var(--success);">S/ 0.00</strong>
+        </div>
+      </div>
+
+      <p style="font-size: 11px; color: var(--gray); margin-bottom: 16px;">
+        📱 Hemos enviado una copia del pedido a nuestro centro de despacho y notificado al bot de atención.
+      </p>
+
+      <div class="receipt-actions">
+        <button type="button" class="btn-print" id="printReceiptBtn">🖨️ IMPRIMIR COMPROBANTE</button>
+        <button type="button" class="btn-continue" id="closeReceiptButton">SEGUIR COMPRANDO</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notificaciones -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

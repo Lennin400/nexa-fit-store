@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+<defs><filter id="s"><feDropShadow dx="0" dy="22" stdDeviation="24" flood-opacity=".18"/></filter></defs>
+<rect width="700" height="700" fill="#eceeea"/>
+<g filter="url(#s)"><path d="M260 185c25-65 155-65 180 0l70 55 70 230-85 25-40-135v220H245V360l-40 135-85-25 70-230z" fill="#d9d9d2"/><path d="M285 190c10-70 120-70 130 0l-30 80h-70z" fill="#c2c2ba"/><rect x="300" y="405" width="100" height="85" rx="20" fill="#c9c9c1"/><text x="350" y="350" text-anchor="middle" fill="#111" font-family="Arial" font-size="42" font-weight="900">NEXA</text></g>
+</svg>

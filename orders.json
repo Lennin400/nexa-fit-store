@@ -1,0 +1,82 @@
+[
+  {
+    "id": "NEXA-SPK78D",
+    "createdAt": "2026-08-09T01:16:32.042Z",
+    "estimatedDelivery": "2026-08-10T01:16:32.042Z",
+    "status": "PAGADO",
+    "timeline": [
+      {
+        "title": "Pago Confirmado",
+        "time": "2026-08-09T01:16:32.042Z",
+        "done": true,
+        "desc": "Transacción aprobada satisfactoriamente."
+      },
+      {
+        "title": "Preparación en Almacén",
+        "time": null,
+        "done": false,
+        "desc": "Empaquetando productos con sello de seguridad."
+      },
+      {
+        "title": "En Camino con Courier",
+        "time": null,
+        "done": false,
+        "desc": "Despacho programado hacia la dirección indicada."
+      },
+      {
+        "title": "Entregado",
+        "time": null,
+        "done": false,
+        "desc": "Recepción por el cliente."
+      }
+    ],
+    "customer": {
+      "name": "Mateo Rodriguez",
+      "firstName": "Mateo",
+      "lastName": "Rodriguez",
+      "email": "mateo@nexafit.pe",
+      "phone": "999888777",
+      "document": "45892301",
+      "address": "Av. Rivera Navarrete 500",
+      "apartment": "Dpto 402",
+      "city": "San Isidro",
+      "region": "Lima",
+      "notes": "Dejar en recepci�n"
+    },
+    "items": [
+      {
+        "id": "whey-pro",
+        "name": "Whey Pro · Chocolate",
+        "category": "suplementos",
+        "unitAmount": 18990,
+        "quantity": 1,
+        "variant": "Chocolate Gourmet"
+      },
+      {
+        "id": "creatine",
+        "name": "Creatina Monohidratada",
+        "category": "suplementos",
+        "unitAmount": 8990,
+        "quantity": 1,
+        "variant": "300g (60 Serv.)"
+      }
+    ],
+    "orderSummary": {
+      "subtotal": 27980,
+      "discountAmount": 5596,
+      "netSubtotal": 22384,
+      "shipping": 0,
+      "total": 22384
+    },
+    "payment": {
+      "method": "tarjeta",
+      "brand": "visa",
+      "maskedCardNumber": "•••• •••• •••• 0366",
+      "last4": "0366",
+      "cardholderName": "MATEO RODRIGUEZ",
+      "cardholderDocument": "45892301",
+      "installments": 1,
+      "authCode": "450618"
+    }
+  }
+]
