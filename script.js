@@ -399,8 +399,6 @@ function setCurrency(newCurrency) {
   }
   showToast(`Moneda actualizada a ${CURRENCIES[newCurrency].name}`);
 }
-`;
-}
 
 function showToast(message) {
   if (!toast) return;
@@ -531,14 +529,6 @@ function getCartTotals() {
     grandTotal: grandTotalUSD,
     freeThresholdUSD
   };
-}, 0);
-
-  const discountAmount = subtotal * state.couponDiscount;
-  const netSubtotal = Math.max(0, subtotal - discountAmount);
-  const shipping = netSubtotal >= 199 || netSubtotal === 0 ? 0 : 10;
-  const grandTotal = netSubtotal + shipping;
-
-  return { subtotal, discountAmount, netSubtotal, shipping, grandTotal };
 }
 
 function renderCart() {
