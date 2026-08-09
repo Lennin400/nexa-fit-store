@@ -22,10 +22,10 @@ const CATALOG = {
   "dymatize-iso100": { name: "Dymatize · ISO 100 Hydrolyzed Isolate 5 lbs", unitAmount: 28990, category: "suplementos" },
   "c4-preworkout": { name: "Cellucor · C4 Original Explosive Pre-Workout 60 Serv", unitAmount: 13990, category: "suplementos" },
   "animal-pak": { name: "Universal · Animal Pak Multivitaminico 44 Packs", unitAmount: 17990, category: "suplementos" },
-  "whey-pro": { name: "NEXA FIT · Whey Pro 100% Isolate Chocolate", unitAmount: 18990, category: "suplementos" },
-  "creatine": { name: "NEXA FIT · Creatina Monohidratada Pura 300g", unitAmount: 8990, category: "suplementos" },
-  "preworkout": { name: "NEXA FIT · Pre-Workout Formula 2026", unitAmount: 11990, category: "suplementos" },
-  "shaker": { name: "NEXA FIT · Shaker Performance 700 ml", unitAmount: 3990, category: "suplementos" },
+  "whey-pro": { name: "MuscleTech · Nitro-Tech 100% Whey Gold 5 lbs", unitAmount: 21990, category: "suplementos" },
+  "creatine": { name: "Optimum Nutrition · Creatina Micronizada 100% Pura", unitAmount: 9990, category: "suplementos" },
+  "preworkout": { name: "Raw Nutrition · CBUM Thavage Pre-Workout 40 Serv", unitAmount: 15990, category: "suplementos" },
+  "shaker": { name: "BlenderBottle · Radian Performance Shaker 700 ml", unitAmount: 4990, category: "suplementos" },
 
   // Ropa Deportiva Multimarca
   "gymshark-stringer": { name: "Gymshark · Onyx Seamless Compression Stringer", unitAmount: 11990, category: "ropa" },

@@ -50,47 +50,47 @@ const PRODUCTS = [
   },
   {
     id: "whey-pro",
-    name: "NEXA FIT · Whey Pro 100% Isolate",
-    brand: "NEXA FIT",
+    name: "MuscleTech · Nitro-Tech 100% Whey Gold",
+    brand: "MuscleTech",
     category: "suplementos",
-    price: 189.90,
-    tag: "MÁS VENDIDO",
-    image: "assets/whey-pro.png",
-    desc: "25g de proteína pura ultrafiltrada por servicio. Rápida digestión, cero azúcar añadida y perfil completo de aminoácidos.",
-    variants: ["Chocolate Suizo (2 kg)", "Vainilla Francesa (2 kg)", "Cookies & Cream (2 kg)"]
+    price: 219.90,
+    tag: "FÓRMULA GOLD",
+    image: "assets/muscletech-nitrotech.png",
+    desc: "24g de aislado y péptidos de suero ultra puro. 5.5g de BCAAs y 4g de glutamina para máxima construcción muscular limpia.",
+    variants: ["Double Rich Chocolate (5 lbs)", "French Vanilla Cream (5 lbs)", "Cookies and Cream (5 lbs)"]
   },
   {
     id: "creatine",
-    name: "NEXA FIT · Creatina Monohidratada Pura",
-    brand: "NEXA FIT",
+    name: "Optimum Nutrition · Micronized Creatine 100% Pura",
+    brand: "Optimum Nutrition",
     category: "suplementos",
-    price: 89.90,
-    tag: "100% PURA",
+    price: 99.90,
+    tag: "CREAPURE 100%",
     image: "assets/creatine.png",
-    desc: "100% ultramicronizada sin sabor. 60 servicios para ganancia de fuerza máxima, potencia explosiva y recuperación.",
-    variants: ["300g (60 Serv.)", "500g (100 Serv.)"]
+    desc: "Creatina monohidratada micronizada de máxima pureza. 5g de potencia pura por servicio para fuerza y volumen explosivo.",
+    variants: ["600g (120 Serv.)", "300g (60 Serv.)"]
   },
   {
     id: "preworkout",
-    name: "NEXA FIT · Pre-Workout Formula 2026",
-    brand: "NEXA FIT",
+    name: "Raw Nutrition · CBUM Thavage Pre-Workout",
+    brand: "Raw Nutrition",
     category: "suplementos",
-    price: 119.90,
-    tag: "NUEVA FÓRMULA",
-    image: "assets/preworkout.png",
-    desc: "Máximo bombeo muscular, concentración láser y energía sostenida sin pico de caída (cero crash).",
-    variants: ["Uva Silvestre (30 Serv.)", "Frutos Rojos (30 Serv.)", "Blue Razz (30 Serv.)"]
+    price: 159.90,
+    tag: "CHRIS BUMSTEAD",
+    image: "assets/cbum-thavage.png",
+    desc: "Formulado por el 5x Mr. Olympia Chris Bumstead. L-Citrulina, Beta-Alanina y nootrópicos para bombeo extremo y foco mental.",
+    variants: ["Rocket Candy (40 Serv.)", "Dragon Fruit (40 Serv.)", "Black Cherry (40 Serv.)"]
   },
   {
     id: "shaker",
-    name: "NEXA FIT · Shaker Performance 700 ml",
-    brand: "NEXA FIT",
+    name: "BlenderBottle · Radian Performance Shaker 700 ml",
+    brand: "BlenderBottle",
     category: "suplementos",
-    price: 39.90,
-    tag: "ACCESORIO",
+    price: 49.90,
+    tag: "ORIGINAL",
     image: "assets/shaker.png",
-    desc: "Plástico antibacteriano libre de BPA, rejilla mezcladora antigrumos y tapa hermética 100% a prueba de fugas.",
-    variants: ["Negro Mate / Logo Volt", "Volt Lime Neón", "Gris Humo Translúcido"]
+    desc: "Acero inoxidable y aislamiento de alta duración. Batidor patentado BlenderBall y sello hermético 100% a prueba de derrames.",
+    variants: ["Matte Black Pro Edition", "Volt Lime Neón", "Titanium Silver"]
   },
 
   // --- ROPA Y ATHLETIC STREETWEAR MULTIMARCA ---
