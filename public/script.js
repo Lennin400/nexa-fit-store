@@ -1,6 +1,48 @@
 /* ==========================================================================
-   NEXA FIT · CLIENT ENGINE (v2.0 Professional)
+   NEXA FIT · CLIENT ENGINE (v2.0 Professional - Multi-Currency Global Engine)
    ========================================================================== */
+
+const CURRENCIES = {
+  USD: { code: "USD", symbol: "$", rate: 1.0, flag: "🇺🇸", label: "USD ($)", name: "Dólar Americano · Global", freeShippingOver: 50, shippingCost: 10 },
+  PEN: { code: "PEN", symbol: "S/ ", rate: 3.75, flag: "🇵🇪", label: "PEN (S/)", name: "Soles · Perú (Moneda Local)", freeShippingOver: 199, shippingCost: 35 },
+  EUR: { code: "EUR", symbol: "€", rate: 0.92, flag: "🇪🇸", label: "EUR (€)", name: "Euros · Europa", freeShippingOver: 48, shippingCost: 10 },
+  MXN: { code: "MXN", symbol: "$", rate: 18.50, flag: "🇲🇽", label: "MXN ($)", name: "Pesos Mexicanos", freeShippingOver: 950, shippingCost: 180 },
+  COP: { code: "COP", symbol: "$", rate: 4150.0, flag: "🇨🇴", label: "COP ($)", name: "Pesos Colombianos", freeShippingOver: 210000, shippingCost: 40000 },
+  CLP: { code: "CLP", symbol: "$", rate: 940.0, flag: "🇨🇱", label: "CLP ($)", name: "Pesos Chilenos", freeShippingOver: 48000, shippingCost: 9500 }
+};
+
+function detectDefaultCurrency() {
+  const saved = localStorage.getItem("nexa_currency");
+  if (saved && CURRENCIES[saved]) return saved;
+
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    const languages = navigator.languages || [navigator.language || ""];
+    
+    // Si entra desde Perú (Zona horaria Lima / Español de Perú)
+    if (tz.includes("Lima") || tz.includes("Peru") || languages.some(l => l.toLowerCase().includes("es-pe"))) {
+      console.log("[GEO] Cliente detectado en Perú ➔ Moneda configurada a PEN (Soles)");
+      return "PEN";
+    }
+    if (tz.includes("Bogota") || languages.some(l => l.toLowerCase().includes("es-co"))) {
+      return "COP";
+    }
+    if (tz.includes("Mexico") || languages.some(l => l.toLowerCase().includes("es-mx"))) {
+      return "MXN";
+    }
+    if (tz.includes("Santiago") || languages.some(l => l.toLowerCase().includes("es-cl"))) {
+      return "CLP";
+    }
+    if (tz.includes("Madrid") || tz.includes("Europe") || languages.some(l => l.toLowerCase().includes("es-es"))) {
+      return "EUR";
+    }
+  } catch (e) {
+    console.log("Currency detection error:", e);
+  }
+
+  return "USD"; // Default internacional
+}
+
 
 const PRODUCTS = [
   // --- SUPLEMENTOS INTERNACIONALES Y NEXA ---
@@ -9,7 +51,8 @@ const PRODUCTS = [
     name: "Optimum Nutrition · Gold Standard 100% Whey",
     brand: "Optimum Nutrition",
     category: "suplementos",
-    price: 249.90,
+    priceUSD: 66.90,
+    price: 66.90,
     tag: "Nº 1 MUNDIAL",
     image: "assets/on-gold-whey.png",
     desc: "La proteína de suero más vendida del mundo. 24g de proteína, 5.5g de BCAAs naturales y absorción ultra rápida.",
@@ -20,7 +63,8 @@ const PRODUCTS = [
     name: "Dymatize · ISO 100 Hydrolyzed Isolate",
     brand: "Dymatize",
     category: "suplementos",
-    price: 289.90,
+    priceUSD: 76.90,
+    price: 76.90,
     tag: "HYDROLYZED",
     image: "assets/dymatize-iso100.png",
     desc: "100% aislado de proteína hidrolizada. 25g de proteína con menos de 1g de azúcar y carbohidratos. Digestión instantánea.",
@@ -31,7 +75,8 @@ const PRODUCTS = [
     name: "Cellucor · C4 Original Pre-Workout",
     brand: "Cellucor",
     category: "suplementos",
-    price: 139.90,
+    priceUSD: 36.90,
+    price: 36.90,
     tag: "ENERGÍA EXPLOSIVA",
     image: "assets/c4-preworkout.png",
     desc: "Fórmula legendaria de pre-entreno con CarnoSyn Beta-Alanina, Nitrato de Creatina y cafeína pura para entrenar al 200%.",
@@ -42,7 +87,8 @@ const PRODUCTS = [
     name: "Universal Nutrition · Animal Pak",
     brand: "Universal Nutrition",
     category: "suplementos",
-    price: 179.90,
+    priceUSD: 47.90,
+    price: 47.90,
     tag: "HARDCORE",
     image: "assets/animal-pak.png",
     desc: "El complejo multivitamínico de entrenamiento más potente y completo del fisicoculturismo. 44 packs con minerales y enzimas.",
@@ -53,7 +99,8 @@ const PRODUCTS = [
     name: "MuscleTech · Nitro-Tech 100% Whey Gold",
     brand: "MuscleTech",
     category: "suplementos",
-    price: 219.90,
+    priceUSD: 58.90,
+    price: 58.90,
     tag: "FÓRMULA GOLD",
     image: "assets/muscletech-nitrotech.png",
     desc: "24g de aislado y péptidos de suero ultra puro. 5.5g de BCAAs y 4g de glutamina para máxima construcción muscular limpia.",
@@ -64,7 +111,8 @@ const PRODUCTS = [
     name: "Optimum Nutrition · Micronized Creatine 100% Pura",
     brand: "Optimum Nutrition",
     category: "suplementos",
-    price: 99.90,
+    priceUSD: 26.90,
+    price: 26.90,
     tag: "CREAPURE 100%",
     image: "assets/creatine.png",
     desc: "Creatina monohidratada micronizada de máxima pureza. 5g de potencia pura por servicio para fuerza y volumen explosivo.",
@@ -75,7 +123,8 @@ const PRODUCTS = [
     name: "Raw Nutrition · CBUM Thavage Pre-Workout",
     brand: "Raw Nutrition",
     category: "suplementos",
-    price: 159.90,
+    priceUSD: 42.90,
+    price: 42.90,
     tag: "CHRIS BUMSTEAD",
     image: "assets/cbum-thavage.png",
     desc: "Formulado por el 5x Mr. Olympia Chris Bumstead. L-Citrulina, Beta-Alanina y nootrópicos para bombeo extremo y foco mental.",
@@ -86,7 +135,8 @@ const PRODUCTS = [
     name: "BlenderBottle · Radian Performance Shaker 700 ml",
     brand: "BlenderBottle",
     category: "suplementos",
-    price: 49.90,
+    priceUSD: 12.90,
+    price: 12.90,
     tag: "ORIGINAL",
     image: "assets/shaker.png",
     desc: "Acero inoxidable y aislamiento de alta duración. Batidor patentado BlenderBall y sello hermético 100% a prueba de derrames.",
@@ -99,7 +149,8 @@ const PRODUCTS = [
     name: "Gymshark · Onyx Seamless Stringer",
     brand: "Gymshark",
     category: "ropa",
-    price: 119.90,
+    priceUSD: 31.90,
+    price: 31.90,
     tag: "GYMSHARK OFICIAL",
     image: "assets/gymshark-stringer.png",
     desc: "Polo bividí / stringer de corte atlético profundo con tejido transpirable sin costuras que resalta la espalda y hombros.",
@@ -110,7 +161,8 @@ const PRODUCTS = [
     name: "YoungLA · Immortal Oversized Acid Tee",
     brand: "YoungLA",
     category: "ropa",
-    price: 129.90,
+    priceUSD: 34.90,
+    price: 34.90,
     tag: "STREETWEAR",
     image: "assets/youngla-pump-cover.png",
     desc: "Polo pesado de algodón lavado vintage con caída oversize perfecta. Diseñado como el pump cover definitivo de gimnasio.",
@@ -121,7 +173,8 @@ const PRODUCTS = [
     name: "Nike Pro · 2-in-1 Dri-FIT Flex Shorts",
     brand: "Nike Pro",
     category: "ropa",
-    price: 149.90,
+    priceUSD: 39.90,
+    price: 39.90,
     tag: "NIKE PRO",
     image: "assets/nike-pro-shorts.png",
     desc: "Shorts de entrenamiento 2 en 1 con calzón interno de compresión elástica y tecnología Dri-FIT para mantenerte fresco y seco.",
@@ -132,7 +185,8 @@ const PRODUCTS = [
     name: "Lululemon · Align High-Rise Sculpt Tights",
     brand: "Lululemon",
     category: "ropa",
-    price: 199.90,
+    priceUSD: 52.90,
+    price: 52.90,
     tag: "PREMIUM FIT",
     image: "assets/lululemon-leggings.png",
     desc: "Leggings de compresión media con tacto ultrasuave Nulu™, tiro alto moldeador y tejido a prueba de sentadillas profundas.",
@@ -143,7 +197,8 @@ const PRODUCTS = [
     name: "NEXA FIT · Essential Training Athletic Tee",
     brand: "NEXA FIT",
     category: "ropa",
-    price: 79.90,
+    priceUSD: 20.90,
+    price: 20.90,
     tag: "TOP VENTAS",
     image: "assets/essential-tee.png",
     desc: "Algodón elástico ultra suave con corte atlético que ajusta el pecho y los brazos, ofreciendo máxima holgura al entrenar.",
@@ -154,7 +209,8 @@ const PRODUCTS = [
     name: "NEXA FIT · Performance Shorts 7” con Forro",
     brand: "NEXA FIT",
     category: "ropa",
-    price: 99.90,
+    priceUSD: 26.90,
+    price: 26.90,
     tag: "NUEVO",
     image: "assets/shorts.png",
     desc: "Tejido elástico de secado ultra rápido con forro interior de compresión y bolsillo antideslizante para smartphone.",
@@ -165,7 +221,8 @@ const PRODUCTS = [
     name: "NEXA FIT · Seamless Sculpt Leggings",
     brand: "NEXA FIT",
     category: "ropa",
-    price: 139.90,
+    priceUSD: 36.90,
+    price: 36.90,
     tag: "POPULAR",
     image: "assets/leggings.png",
     desc: "Tecnología sin costuras con pretina de compresión alta que moldea la cintura y tejido a prueba de sentadillas.",
@@ -176,7 +233,8 @@ const PRODUCTS = [
     name: "NEXA FIT · Oversized Rest Day Hoodie 420 GSM",
     brand: "NEXA FIT",
     category: "ropa",
-    price: 169.90,
+    priceUSD: 44.90,
+    price: 44.90,
     tag: "PREMIUM",
     image: "assets/hoodie.png",
     desc: "Algodón pesado perchado de 420 GSM para abrigar antes y después de cada sesión intensa. Ajuste holgado estético.",
@@ -186,6 +244,7 @@ const PRODUCTS = [
 
 // Estado global de la aplicación
 const state = {
+  currency: detectDefaultCurrency(),
   cart: [
     { id: "whey-pro", quantity: 1, variant: "Chocolate Gourmet" },
     { id: "creatine", quantity: 1, variant: "300g (60 Serv.)" }
@@ -285,8 +344,62 @@ const toast = document.getElementById("toast");
 // UTILIDADES Y FORMATEO
 // ==========================================================================
 
+
+function formatPrice(amountUSD) {
+  const curr = CURRENCIES[state.currency] || CURRENCIES.USD;
+  const converted = Number(amountUSD || 0) * curr.rate;
+  if (curr.code === "COP" || curr.code === "CLP") {
+    return `${curr.symbol}${Math.round(converted).toLocaleString("es-PE")}`;
+  }
+  return `${curr.symbol}${converted.toFixed(2)}`;
+}
+
 function formatPEN(amount) {
-  return `S/ ${amount.toFixed(2)}`;
+  return formatPrice(amount);
+}
+
+function setCurrency(newCurrency) {
+  if (!CURRENCIES[newCurrency]) return;
+  state.currency = newCurrency;
+  localStorage.setItem("nexa_currency", newCurrency);
+
+  // Actualizar UI del selector
+  const flagEl = document.getElementById("currentCurrencyFlag");
+  const codeEl = document.getElementById("currentCurrencyCode");
+  if (flagEl) flagEl.textContent = CURRENCIES[newCurrency].flag;
+  if (codeEl) codeEl.textContent = CURRENCIES[newCurrency].code;
+
+  document.querySelectorAll(".currency-option").forEach(opt => {
+    opt.classList.toggle("active", opt.dataset.currency === newCurrency);
+  });
+
+  // Actualizar barra de anuncios
+  const annEl = document.getElementById("announcementText");
+  if (annEl) {
+    const isPEN = newCurrency === "PEN";
+    annEl.innerHTML = `<span class="announcement-dot"></span> ENVÍOS A TODO EL MUNDO 🌎 · ENVÍO GRATIS ${isPEN ? 'DESDE S/ 199' : 'DESDE $50 USD'} · CAMBIOS HASTA 15 DÍAS`;
+  }
+
+  // Sincronizar select de país en checkout
+  const countrySelect = document.getElementById("checkoutCountry");
+  if (countrySelect) {
+    if (newCurrency === "PEN") countrySelect.value = "PE";
+    else if (newCurrency === "EUR") countrySelect.value = "ES";
+    else if (newCurrency === "MXN") countrySelect.value = "MX";
+    else if (newCurrency === "CLP") countrySelect.value = "CL";
+    else if (newCurrency === "COP") countrySelect.value = "CO";
+    else countrySelect.value = "US";
+  }
+
+  // Re-renderizar catálogo y carrito
+  renderProducts();
+  renderCart();
+  if (checkoutModal && checkoutModal.classList.contains("active")) {
+    renderCheckout();
+  }
+  showToast(`Moneda actualizada a ${CURRENCIES[newCurrency].name}`);
+}
+`;
 }
 
 function showToast(message) {
@@ -397,10 +510,28 @@ function renderProducts() {
 // ==========================================================================
 
 function getCartTotals() {
-  const subtotal = state.cart.reduce((sum, item) => {
-    const product = PRODUCTS.find((p) => p.id === item.id);
-    return sum + (product ? product.price * item.quantity : 0);
+  const curr = CURRENCIES[state.currency] || CURRENCIES.USD;
+  const subtotalUSD = state.cart.reduce((sum, item) => {
+    const prod = PRODUCTS.find((p) => p.id === item.id);
+    const pUSD = prod ? (prod.priceUSD || prod.price) : 0;
+    return sum + pUSD * item.quantity;
   }, 0);
+
+  const discountAmountUSD = subtotalUSD * state.couponDiscount;
+  const netSubtotalUSD = Math.max(0, subtotalUSD - discountAmountUSD);
+  const freeThresholdUSD = curr.freeShippingOver / curr.rate;
+  const shippingUSD = (netSubtotalUSD >= freeThresholdUSD || netSubtotalUSD === 0) ? 0 : (curr.shippingCost / curr.rate);
+  const grandTotalUSD = netSubtotalUSD + shippingUSD;
+
+  return {
+    subtotal: subtotalUSD,
+    discountAmount: discountAmountUSD,
+    netSubtotal: netSubtotalUSD,
+    shipping: shippingUSD,
+    grandTotal: grandTotalUSD,
+    freeThresholdUSD
+  };
+}, 0);
 
   const discountAmount = subtotal * state.couponDiscount;
   const netSubtotal = Math.max(0, subtotal - discountAmount);
@@ -935,6 +1066,7 @@ if (checkoutForm) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customer: {
+            country: formData.get("country") || "PE",
             firstName,
             lastName,
             document: documentVal,
@@ -946,6 +1078,7 @@ if (checkoutForm) {
             email,
             notes
           },
+          currency: state.currency,
           card: {
             cardNumber: rawCard,
             cardholderName,
@@ -1415,3 +1548,57 @@ renderCart();
 initScrollReveal();
 initCounters();
 initRippleEffect();
+
+
+// Manejo de eventos del selector de monedas
+document.addEventListener("DOMContentLoaded", () => {
+  const currencyToggle = document.getElementById("currencyToggle");
+  const currencyWrap = document.getElementById("currencySelectorWrap");
+  
+  if (currencyToggle && currencyWrap) {
+    currencyToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currencyWrap.classList.toggle("active");
+    });
+  }
+
+  document.querySelectorAll(".currency-option").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const code = btn.dataset.currency;
+      setCurrency(code);
+      if (currencyWrap) currencyWrap.classList.remove("active");
+    });
+  });
+
+  // Cerrar selector al hacer click fuera
+  document.addEventListener("click", (e) => {
+    if (currencyWrap && !currencyWrap.contains(e.target)) {
+      currencyWrap.classList.remove("active");
+    }
+  });
+
+  // Al cambiar país en checkout, auto-cambiar moneda
+  const countrySelect = document.getElementById("checkoutCountry");
+  if (countrySelect) {
+    countrySelect.addEventListener("change", (e) => {
+      const val = e.target.value;
+      if (val === "PE") setCurrency("PEN");
+      else if (val === "ES") setCurrency("EUR");
+      else if (val === "MX") setCurrency("MXN");
+      else if (val === "CL") setCurrency("CLP");
+      else if (val === "CO") setCurrency("COP");
+      else setCurrency("USD");
+    });
+  }
+
+  // Inicializar UI de moneda activa
+  const curr = CURRENCIES[state.currency] || CURRENCIES.USD;
+  const flagEl = document.getElementById("currentCurrencyFlag");
+  const codeEl = document.getElementById("currentCurrencyCode");
+  if (flagEl) flagEl.textContent = curr.flag;
+  if (codeEl) codeEl.textContent = curr.code;
+  document.querySelectorAll(".currency-option").forEach(opt => {
+    opt.classList.toggle("active", opt.dataset.currency === state.currency);
+  });
+});
+

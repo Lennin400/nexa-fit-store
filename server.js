@@ -10,6 +10,16 @@ const app = express();
 const PORT = Number(process.env.PORT || 4242);
 const BASE_URL = process.env.BASE_URL || `http://127.0.0.1:${PORT}`;
 
+
+const EXCHANGE_RATES = {
+  USD: { rate: 1.0, symbol: "$" },
+  PEN: { rate: 3.75, symbol: "S/ " },
+  EUR: { rate: 0.92, symbol: "€" },
+  MXN: { rate: 18.5, symbol: "$" },
+  COP: { rate: 4150.0, symbol: "$" },
+  CLP: { rate: 940.0, symbol: "$" }
+};
+
 const DB_FILE = process.env.VERCEL ? path.join("/tmp", "orders.json") : path.join(__dirname, "orders.json");
 
 // Memoria volátil fallback para serverless si el filesystem está restringido
@@ -130,21 +140,30 @@ function normalizeItems(rawItems) {
   });
 }
 
-// Cálculo seguro de totales en el servidor
-function calculateOrder(items, discountRate = 0) {
+// Cálculo seguro de totales en el servidor con soporte multi-moneda
+function calculateOrder(items, discountRate = 0, currencyCode = "USD") {
+  const curr = EXCHANGE_RATES[currencyCode] || EXCHANGE_RATES.USD;
   const subtotal = items.reduce(
     (sum, item) => sum + item.unitAmount * item.quantity,
     0
   );
   const discountAmount = Math.round(subtotal * Math.min(0.5, Math.max(0, Number(discountRate) || 0)));
   const netSubtotal = Math.max(0, subtotal - discountAmount);
-  const shipping = netSubtotal >= 19900 || netSubtotal === 0 ? 0 : 1000;
+  const freeThreshold = currencyCode === "PEN" ? 19900 : 5000; // S/ 199 en PEN o $50 en USD
+  const shipping = netSubtotal >= freeThreshold || netSubtotal === 0 ? 0 : (currencyCode === "PEN" ? 3500 : 1000);
+  
+  const total = netSubtotal + shipping;
+  const displayTotal = `${curr.symbol}${(total / 100).toFixed(2)}`;
+
   return {
+    currency: currencyCode,
+    currencySymbol: curr.symbol,
     subtotal,
     discountAmount,
     netSubtotal,
     shipping,
-    total: netSubtotal + shipping
+    total,
+    displayTotal
   };
 }
 
@@ -158,7 +177,7 @@ function generateOrderId() {
   return `NEXA-${randomCode}`;
 }
 
-// Enviar notificación a Telegram Bot con diseño enriquecido
+// Enviar notificación a Telegram Bot con diseño enriquecido y moneda
 async function sendTelegramNotification(order) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -167,8 +186,11 @@ async function sendTelegramNotification(order) {
     return false;
   }
 
+  const symbol = order.orderSummary.currencySymbol || "S/ ";
+  const currencyCode = order.orderSummary.currency || "PEN";
+
   const itemsList = order.items
-    .map(i => `• *${i.name}* (${i.variant || 'Normal'}) x${i.quantity} — S/ ${(i.unitAmount * i.quantity / 100).toFixed(2)}`)
+    .map(i => `• *${i.name}* (${i.variant || 'Normal'}) x${i.quantity} — ${symbol}${(i.unitAmount * i.quantity / 100).toFixed(2)}`)
     .join("\n");
 
   const message = `
@@ -176,15 +198,17 @@ async function sendTelegramNotification(order) {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🆔 *Código de Orden:* \`${order.id}\`
 📅 *Fecha:* ${new Date(order.createdAt).toLocaleString("es-PE", { timeZone: "America/Lima" })}
+🌍 *Moneda:* \`${currencyCode}\` (${symbol})
 📊 *Estado:* 🟢 PAGADO Y CONFIRMADO
 
 👤 *DATOS DEL CLIENTE*
 • *Nombre:* ${order.customer.name}
-• *Documento (DNI/RUC):* ${order.customer.document}
+• *Documento:* ${order.customer.document}
 • *Email:* \`${order.customer.email}\`
 • *Teléfono:* \`${order.customer.phone}\`
 
 📍 *DIRECCIÓN DE ENTREGA*
+• *País / Destino:* ${order.customer.country || 'No especificado'}
 • *Dirección:* ${order.customer.address} ${order.customer.apartment ? `(${order.customer.apartment})` : ''}
 • *Ubicación:* ${order.customer.city}, ${order.customer.region}
 ${order.customer.notes ? `• *Notas:* _${order.customer.notes}_` : ''}
@@ -198,9 +222,9 @@ ${order.customer.notes ? `• *Notas:* _${order.customer.notes}_` : ''}
 ${itemsList}
 
 💰 *DESGLOSE FINANCIERO*
-• Subtotal: S/ ${(order.orderSummary.subtotal / 100).toFixed(2)}
-${order.orderSummary.discountAmount > 0 ? `• Descuento Cupón: -S/ ${(order.orderSummary.discountAmount / 100).toFixed(2)}\n` : ''}• Envío: ${order.orderSummary.shipping === 0 ? "GRATIS (Superó S/ 199)" : `S/ ${(order.orderSummary.shipping / 100).toFixed(2)}`}
-• *TOTAL COBRADO:* *S/ ${(order.orderSummary.total / 100).toFixed(2)}*
+• Subtotal: ${symbol}${(order.orderSummary.subtotal / 100).toFixed(2)}
+${order.orderSummary.discountAmount > 0 ? `• Descuento Cupón: -${symbol}${(order.orderSummary.discountAmount / 100).toFixed(2)}\n` : ''}• Envío: ${order.orderSummary.shipping === 0 ? "GRATIS" : `${symbol}${(order.orderSummary.shipping / 100).toFixed(2)}`}
+• *TOTAL COBRADO:* *${symbol}${(order.orderSummary.total / 100).toFixed(2)} ${currencyCode}*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   `.trim();
 
@@ -305,7 +329,8 @@ app.post("/api/process-payment", async (req, res) => {
     const discountRate = couponCode === "NEXAFIT20" ? 0.20 : 0;
 
     const items = normalizeItems(req.body.items);
-    const orderSummary = calculateOrder(items, discountRate);
+    const currencyCode = String(req.body.currency || "USD").toUpperCase();
+    const orderSummary = calculateOrder(items, discountRate, currencyCode);
 
     const firstName = String(customer.firstName || "").trim();
     const lastName = String(customer.lastName || "").trim();
