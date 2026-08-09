@@ -497,10 +497,12 @@ app.get("/api/stats", (req, res) => {
   });
 });
 
-// Fallback para SPA / inicio
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+// Fallback para desarrollo local
+if (!process.env.VERCEL) {
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+  });
+}
 
 if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
   app.listen(PORT, () => {
