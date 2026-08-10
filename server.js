@@ -105,12 +105,17 @@ function validateLuhn(cardNumber) {
 // Detección de franquicia de tarjeta
 function detectCardBrand(number) {
   const clean = String(number || "").replace(/\D/g, "");
+  if (!clean) return "tarjeta";
   if (/^4/.test(clean)) return "visa";
   if (/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[0-1]|2720)/.test(clean)) return "mastercard";
+  if (clean.length === 1 && clean === "5") return "mastercard";
+  if (clean.length >= 1 && /^2[2-7]/.test(clean)) return "mastercard";
   if (/^3[47]/.test(clean)) return "amex";
-  if (/^3(?:0[0-5]|[68])/.test(clean)) return "diners";
-  if (/^6(?:011|5)/.test(clean)) return "discover";
-  if (/^35/.test(clean)) return "jcb";
+  if (/^3(?:0[0-5]|[689]|095)/.test(clean)) return "diners";
+  if (/^(?:2131|1800|35)/.test(clean)) return "jcb";
+  if (/^(6011|65|64[4-9]|622)/.test(clean)) return "discover";
+  if (/^(50|5[6-8]|67)/.test(clean)) return "maestro";
+  if (/^(62|81)/.test(clean)) return "unionpay";
   return "tarjeta";
 }
 

@@ -44,201 +44,492 @@ function detectDefaultCurrency() {
 }
 
 
+function getLang() {
+  const curr = state && state.currency ? state.currency : "USD";
+  return curr === "USD" ? "en" : "es";
+}
+
+function getBilingualText(field) {
+  if (!field) return "";
+  if (typeof field === "string") return field;
+  const lang = getLang();
+  return field[lang] || field["es"] || field["en"] || "";
+}
+
+const I18N_DICTIONARY = {
+  es: {
+    announcement: "ENVÍOS A TODO EL MUNDO 🌎 · ENVÍO GRATIS DESDE $50 USD / S/ 199 PEN · DEVOLUCIONES 15 DÍAS",
+    nav_all: "TODOS",
+    nav_gym_wear: "ROPA DE GYM",
+    nav_supplements: "SUPLEMENTOS",
+    nav_collection_2026: "COLECCIÓN 2026",
+    track_order: "Rastrear Pedido",
+    cart_bag: "BOLSA",
+    hero_eyebrow: "COLECCIÓN PERFORMANCE 2026",
+    hero_title: "ENTRENA MÁS FUERTE.",
+    hero_text: "Prendas técnicas con ajuste atlético y suplementos de máxima pureza formulados para superar tus límites en cada repetición.",
+    btn_shop_clothing: "COMPRAR ROPA",
+    btn_view_supplements: "VER SUPLEMENTOS",
+    certified_quality_title: "CALIDAD CERTIFICADA",
+    certified_quality_sub: "Sin rellenos · 100% Ultrafiltrado",
+    express_shipping_title: "ENVÍOS EXPRESS",
+    express_shipping_sub: "Cobertura global y seguimiento local",
+    secure_payment_title: "PAGO 100% SEGURO",
+    secure_payment_sub: "Encriptación SSL & Tarjetas Visa/Mastercard",
+    satisfaction_title: "GARANTÍA DE SATISFACCIÓN",
+    satisfaction_sub: "15 días para cambios sin preguntas",
+    official_catalog_title: "CATÁLOGO OFICIAL 2026",
+    filter_all: "TODOS",
+    filter_clothing: "ROPA ATLETICA",
+    filter_supplements: "SUPLEMENTOS PRO",
+    sort_featured: "Ordenar por: Destacados",
+    sort_price_asc: "Precio: Menor a Mayor",
+    sort_price_desc: "Precio: Mayor a Menor",
+    sort_name: "Nombre (A-Z)",
+    quick_view_btn: "👁️ VISTA RÁPIDA",
+    add_to_cart_btn: "+ AGREGAR",
+    quick_add_btn: "AGREGAR RÁPIDO",
+    shopping_bag_title: "BOLSA DE COMPRA",
+    free_shipping_unlocked: "🎉 ¡Felicitaciones! Tienes ENVÍO GRATIS",
+    subtotal: "Subtotal",
+    total: "TOTAL",
+    checkout_now_btn: "PROCEDER AL PAGO 🔒",
+    empty_cart_title: "Tu bolsa está vacía",
+    empty_cart_msg: "Descubre nuestras prendas de alto rendimiento y suplementación pro.",
+    explore_catalog_btn: "EXPLORAR CATÁLOGO",
+    checkout_modal_title: "CHECKOUT SEGURO",
+    checkout_modal_subtitle: "Completa tus datos para confirmar tu pedido al instante",
+    contact_step_title: "1. Información de Contacto & Envío",
+    lbl_full_name: "Nombre Completo",
+    lbl_email: "Correo Electrónico",
+    lbl_phone: "Teléfono / WhatsApp",
+    lbl_address: "Dirección de Entrega",
+    lbl_city: "Ciudad / Distrito",
+    payment_step_title: "2. Método de Pago (Tarjeta de Crédito o Débito)",
+    lbl_card_number: "Número de Tarjeta",
+    lbl_exp_date: "Vencimiento (MM/AA)",
+    lbl_cvv: "CVV / CVC",
+    lbl_cardholder: "Titular de la Tarjeta",
+    summary_title: "RESUMEN DE TU PEDIDO",
+    shipping_lbl: "Envío",
+    free_lbl: "GRATIS",
+    complete_order_btn: "COMPLETAR PAGO SEGURO",
+    search_placeholder: "Buscar por nombre, proteína, creatina, shorts, polerón..."
+  },
+  en: {
+    announcement: "WORLDWIDE EXPRESS SHIPPING 🌎 · FREE SHIPPING OVER $50 USD / S/ 199 PEN · 15 DAYS RETURNS",
+    nav_all: "ALL",
+    nav_gym_wear: "GYM WEAR",
+    nav_supplements: "SUPPLEMENTS",
+    nav_collection_2026: "2026 COLLECTION",
+    track_order: "Track Order",
+    cart_bag: "BAG",
+    hero_eyebrow: "2026 PERFORMANCE COLLECTION",
+    hero_title: "TRAIN HARDER.",
+    hero_text: "Technical athletic wear and ultra-pure supplements formulated to push your limits on every rep.",
+    btn_shop_clothing: "SHOP APPAREL",
+    btn_view_supplements: "VIEW SUPPLEMENTS",
+    certified_quality_title: "CERTIFIED QUALITY",
+    certified_quality_sub: "Zero Fillers · 100% Ultra-filtered",
+    express_shipping_title: "EXPRESS SHIPPING",
+    express_shipping_sub: "Global coverage & local tracking",
+    secure_payment_title: "100% SECURE PAYMENT",
+    secure_payment_sub: "SSL Encryption & Visa/Mastercard",
+    satisfaction_title: "SATISFACTION GUARANTEE",
+    satisfaction_sub: "15 days return policy no questions asked",
+    official_catalog_title: "OFFICIAL 2026 CATALOG",
+    filter_all: "ALL",
+    filter_clothing: "ATHLETIC WEAR",
+    filter_supplements: "PRO SUPPLEMENTS",
+    sort_featured: "Sort by: Featured",
+    sort_price_asc: "Price: Low to High",
+    sort_price_desc: "Price: High to Low",
+    sort_name: "Name (A-Z)",
+    quick_view_btn: "👁️ QUICK VIEW",
+    add_to_cart_btn: "+ ADD TO BAG",
+    quick_add_btn: "QUICK ADD",
+    shopping_bag_title: "SHOPPING BAG",
+    free_shipping_unlocked: "🎉 Congratulations! You unlocked FREE SHIPPING",
+    subtotal: "Subtotal",
+    total: "TOTAL",
+    checkout_now_btn: "PROCEED TO CHECKOUT 🔒",
+    empty_cart_title: "Your shopping bag is empty",
+    empty_cart_msg: "Discover our high-performance apparel and pro supplements.",
+    explore_catalog_btn: "EXPLORE CATALOG",
+    checkout_modal_title: "SECURE CHECKOUT",
+    checkout_modal_subtitle: "Enter your details to confirm your order instantly",
+    contact_step_title: "1. Contact & Shipping Information",
+    lbl_full_name: "Full Name",
+    lbl_email: "Email Address",
+    lbl_phone: "Phone / WhatsApp",
+    lbl_address: "Shipping Address",
+    lbl_city: "City / State",
+    payment_step_title: "2. Payment Method (Credit or Debit Card)",
+    lbl_card_number: "Card Number",
+    lbl_exp_date: "Expiration (MM/YY)",
+    lbl_cvv: "CVV / CVC",
+    lbl_cardholder: "Cardholder Name",
+    summary_title: "ORDER SUMMARY",
+    shipping_lbl: "Shipping",
+    free_lbl: "FREE",
+    complete_order_btn: "COMPLETE SECURE PAYMENT",
+    search_placeholder: "Search by name, protein, creatine, shorts, hoodie..."
+  }
+};
+
 const PRODUCTS = [
   // --- SUPLEMENTOS INTERNACIONALES Y NEXA ---
   {
     id: "on-gold-whey",
-    name: "Optimum Nutrition · Gold Standard 100% Whey",
+    name: {
+      es: "Optimum Nutrition · Gold Standard 100% Whey",
+      en: "Optimum Nutrition · Gold Standard 100% Whey"
+    },
     brand: "Optimum Nutrition",
     category: "suplementos",
-    priceUSD: 66.90,
-    price: 66.90,
-    tag: "Nº 1 MUNDIAL",
+    originalPriceUSD: 66.90,
+    priceUSD: 48.90,
+    price: 48.90,
+    tag: {
+      es: "⚡ OPORTUNIDAD -27%",
+      en: "⚡ DEAL -27%"
+    },
     image: "assets/on-gold-whey.png",
-    desc: "La proteína de suero más vendida del mundo. 24g de proteína, 5.5g de BCAAs naturales y absorción ultra rápida.",
+    desc: {
+      es: "La proteína de suero más vendida del mundo. 24g de proteína, 5.5g de BCAAs naturales y absorción ultra rápida.",
+      en: "The world's #1 whey protein. 24g protein, 5.5g natural BCAAs, and ultra-fast absorption."
+    },
     variants: ["Double Rich Chocolate (5 lbs)", "Vanilla Ice Cream (5 lbs)", "Delicious Strawberry (5 lbs)"]
   },
   {
     id: "dymatize-iso100",
-    name: "Dymatize · ISO 100 Hydrolyzed Isolate",
+    name: {
+      es: "Dymatize · ISO 100 Hydrolyzed Isolate",
+      en: "Dymatize · ISO 100 Hydrolyzed Isolate"
+    },
     brand: "Dymatize",
     category: "suplementos",
-    priceUSD: 76.90,
-    price: 76.90,
-    tag: "HYDROLYZED",
+    originalPriceUSD: 76.90,
+    priceUSD: 52.90,
+    price: 52.90,
+    tag: {
+      es: "🔥 OFERTA -31%",
+      en: "🔥 SALE -31%"
+    },
     image: "assets/dymatize-iso100.png",
-    desc: "100% aislado de proteína hidrolizada. 25g de proteína con menos de 1g de azúcar y carbohidratos. Digestión instantánea.",
+    desc: {
+      es: "100% aislado de proteína hidrolizada. 25g de proteína con menos de 1g de azúcar y carbohidratos. Digestión instantánea.",
+      en: "100% hydrolyzed whey isolate. 25g protein with less than 1g sugar and carbs. Instant digestion."
+    },
     variants: ["Gourmet Chocolate (5 lbs)", "Fudge Brownie (5 lbs)", "Birthday Cake (5 lbs)"]
   },
   {
     id: "c4-preworkout",
-    name: "Cellucor · C4 Original Pre-Workout",
+    name: {
+      es: "Cellucor · C4 Original Pre-Workout",
+      en: "Cellucor · C4 Original Pre-Workout"
+    },
     brand: "Cellucor",
     category: "suplementos",
-    priceUSD: 36.90,
-    price: 36.90,
-    tag: "ENERGÍA EXPLOSIVA",
+    originalPriceUSD: 36.90,
+    priceUSD: 24.90,
+    price: 24.90,
+    tag: {
+      es: "💥 PROMO -32%",
+      en: "💥 PROMO -32%"
+    },
     image: "assets/c4-preworkout.png",
-    desc: "Fórmula legendaria de pre-entreno con CarnoSyn Beta-Alanina, Nitrato de Creatina y cafeína pura para entrenar al 200%.",
+    desc: {
+      es: "Fórmula legendaria de pre-entreno con CarnoSyn Beta-Alanina, Nitrato de Creatina y cafeína pura para entrenar al 200%.",
+      en: "Legendary pre-workout formula with CarnoSyn Beta-Alanine, Creatine Nitrate, and pure caffeine for 200% energy."
+    },
     variants: ["Icy Blue Razz (60 Serv.)", "Fruit Punch (60 Serv.)", "Watermelon (60 Serv.)"]
   },
   {
     id: "animal-pak",
-    name: "Universal Nutrition · Animal Pak",
+    name: {
+      es: "Universal Nutrition · Animal Pak",
+      en: "Universal Nutrition · Animal Pak"
+    },
     brand: "Universal Nutrition",
     category: "suplementos",
-    priceUSD: 47.90,
-    price: 47.90,
-    tag: "HARDCORE",
+    originalPriceUSD: 47.90,
+    priceUSD: 32.90,
+    price: 32.90,
+    tag: {
+      es: "⚡ OFERTA -31%",
+      en: "⚡ SALE -31%"
+    },
     image: "assets/animal-pak.png",
-    desc: "El complejo multivitamínico de entrenamiento más potente y completo del fisicoculturismo. 44 packs con minerales y enzimas.",
+    desc: {
+      es: "El complejo multivitamínico de entrenamiento más potente y completo del fisicoculturismo. 44 packs con minerales y enzimas.",
+      en: "The most powerful bodybuilding training multivitamin pack. 44 daily packs loaded with vitamins and minerals."
+    },
     variants: ["Lata 44 Packs (Uso Diario)", "Lata 30 Packs (Edición Polvo)"]
   },
   {
     id: "whey-pro",
-    name: "MuscleTech · Nitro-Tech 100% Whey Gold",
+    name: {
+      es: "MuscleTech · Nitro-Tech 100% Whey Gold",
+      en: "MuscleTech · Nitro-Tech 100% Whey Gold"
+    },
     brand: "MuscleTech",
     category: "suplementos",
-    priceUSD: 58.90,
-    price: 58.90,
-    tag: "FÓRMULA GOLD",
+    originalPriceUSD: 58.90,
+    priceUSD: 39.90,
+    price: 39.90,
+    tag: {
+      es: "💥 PROMO -32%",
+      en: "💥 PROMO -32%"
+    },
     image: "assets/muscletech-nitrotech.png",
-    desc: "24g de aislado y péptidos de suero ultra puro. 5.5g de BCAAs y 4g de glutamina para máxima construcción muscular limpia.",
+    desc: {
+      es: "24g de aislado y péptidos de suero ultra puro. 5.5g de BCAAs y 4g de glutamina para máxima construcción muscular limpia.",
+      en: "24g of ultra-pure whey isolate and peptides. 5.5g BCAAs and 4g glutamine for lean muscle growth."
+    },
     variants: ["Double Rich Chocolate (5 lbs)", "French Vanilla Cream (5 lbs)", "Cookies and Cream (5 lbs)"]
   },
   {
     id: "creatine",
-    name: "Optimum Nutrition · Micronized Creatine 100% Pura",
+    name: {
+      es: "Optimum Nutrition · Micronized Creatine 100% Pura",
+      en: "Optimum Nutrition · Micronized Pure Creatine"
+    },
     brand: "Optimum Nutrition",
     category: "suplementos",
-    priceUSD: 26.90,
-    price: 26.90,
-    tag: "CREAPURE 100%",
+    originalPriceUSD: 26.90,
+    priceUSD: 16.90,
+    price: 16.90,
+    tag: {
+      es: "🔥 TOP VENTAS -37%",
+      en: "🔥 BEST SELLER -37%"
+    },
     image: "assets/creatine.png",
-    desc: "Creatina monohidratada micronizada de máxima pureza. 5g de potencia pura por servicio para fuerza y volumen explosivo.",
+    desc: {
+      es: "Creatina monohidratada micronizada de máxima pureza. 5g de potencia pura por servicio para fuerza y volumen explosivo.",
+      en: "100% pure unflavored micronized creatine monohydrate. 5g pure power per serving for strength and muscle volume."
+    },
     variants: ["600g (120 Serv.)", "300g (60 Serv.)"]
   },
   {
     id: "preworkout",
-    name: "Raw Nutrition · CBUM Thavage Pre-Workout",
+    name: {
+      es: "Raw Nutrition · CBUM Thavage Pre-Workout",
+      en: "Raw Nutrition · CBUM Thavage Pre-Workout"
+    },
     brand: "Raw Nutrition",
     category: "suplementos",
-    priceUSD: 42.90,
-    price: 42.90,
-    tag: "CHRIS BUMSTEAD",
+    originalPriceUSD: 42.90,
+    priceUSD: 28.90,
+    price: 28.90,
+    tag: {
+      es: "🏆 MR. OLYMPIA -32%",
+      en: "🏆 MR. OLYMPIA -32%"
+    },
     image: "assets/cbum-thavage.png",
-    desc: "Formulado por el 5x Mr. Olympia Chris Bumstead. L-Citrulina, Beta-Alanina y nootrópicos para bombeo extremo y foco mental.",
+    desc: {
+      es: "Formulado por el 5x Mr. Olympia Chris Bumstead. L-Citrulina, Beta-Alanina y nootrópicos para bombeo extremo y foco mental.",
+      en: "Formulated by 5x Mr. Olympia Chris Bumstead. L-Citrulline, Beta-Alanine, and nootropics for extreme pump and focus."
+    },
     variants: ["Rocket Candy (40 Serv.)", "Dragon Fruit (40 Serv.)", "Black Cherry (40 Serv.)"]
   },
   {
     id: "shaker",
-    name: "BlenderBottle · Radian Performance Shaker 700 ml",
+    name: {
+      es: "BlenderBottle · Radian Performance Shaker 700 ml",
+      en: "BlenderBottle · Radian Performance Shaker 700 ml"
+    },
     brand: "BlenderBottle",
     category: "suplementos",
-    priceUSD: 12.90,
-    price: 12.90,
-    tag: "ORIGINAL",
+    originalPriceUSD: 12.90,
+    priceUSD: 7.90,
+    price: 7.90,
+    tag: {
+      es: "🎁 LIQUIDACIÓN -38%",
+      en: "🎁 CLEARANCE -38%"
+    },
     image: "assets/shaker.png",
-    desc: "Acero inoxidable y aislamiento de alta duración. Batidor patentado BlenderBall y sello hermético 100% a prueba de derrames.",
+    desc: {
+      es: "Acero inoxidable y aislamiento de alta duración. Batidor patentado BlenderBall y sello hermético 100% a prueba de derrames.",
+      en: "Insulated stainless steel shaker bottle with patented BlenderBall whisk and 100% leak-proof lid."
+    },
     variants: ["Matte Black Pro Edition", "Volt Lime Neón", "Titanium Silver"]
   },
-
-  // --- ROPA Y ATHLETIC STREETWEAR MULTIMARCA ---
   {
     id: "gymshark-stringer",
-    name: "Gymshark · Onyx Seamless Stringer",
+    name: {
+      es: "Gymshark · Onyx Seamless Stringer",
+      en: "Gymshark · Onyx Seamless Stringer"
+    },
     brand: "Gymshark",
     category: "ropa",
-    priceUSD: 31.90,
-    price: 31.90,
-    tag: "GYMSHARK OFICIAL",
+    originalPriceUSD: 31.90,
+    priceUSD: 19.90,
+    price: 19.90,
+    tag: {
+      es: "🔥 OFERTA -37%",
+      en: "🔥 SALE -37%"
+    },
     image: "assets/gymshark-stringer.png",
-    desc: "Polo bividí / stringer de corte atlético profundo con tejido transpirable sin costuras que resalta la espalda y hombros.",
+    desc: {
+      es: "Polo bividí / stringer de corte atlético profundo con tejido transpirable sin costuras que resalta la espalda y hombros.",
+      en: "Deep drop-cut seamless stringer tank top. Breathable fabric engineered to accentuate back and shoulders."
+    },
     variants: ["Talla S", "Talla M", "Talla L", "Talla XL"]
   },
   {
     id: "youngla-pump-cover",
-    name: "YoungLA · Immortal Oversized Acid Tee",
+    name: {
+      es: "YoungLA · Immortal Oversized Acid Tee",
+      en: "YoungLA · Immortal Oversized Acid Tee"
+    },
     brand: "YoungLA",
     category: "ropa",
-    priceUSD: 34.90,
-    price: 34.90,
-    tag: "STREETWEAR",
+    originalPriceUSD: 34.90,
+    priceUSD: 21.90,
+    price: 21.90,
+    tag: {
+      es: "💥 STREETWEAR -37%",
+      en: "💥 STREETWEAR -37%"
+    },
     image: "assets/youngla-pump-cover.png",
-    desc: "Polo pesado de algodón lavado vintage con caída oversize perfecta. Diseñado como el pump cover definitivo de gimnasio.",
+    desc: {
+      es: "Polo pesado de algodón lavado vintage con caída oversize perfecta. Diseñado como el pump cover definitivo de gimnasio.",
+      en: "Heavyweight vintage acid wash cotton tee with oversized fit. Designed as the ultimate gym pump cover."
+    },
     variants: ["Talla S (Oversize)", "Talla M (Oversize)", "Talla L (Oversize)", "Talla XL (Oversize)"]
   },
   {
     id: "nike-pro-shorts",
-    name: "Nike Pro · 2-in-1 Dri-FIT Flex Shorts",
+    name: {
+      es: "Nike Pro · 2-in-1 Dri-FIT Flex Shorts",
+      en: "Nike Pro · 2-in-1 Dri-FIT Flex Shorts"
+    },
     brand: "Nike Pro",
     category: "ropa",
-    priceUSD: 39.90,
-    price: 39.90,
-    tag: "NIKE PRO",
+    originalPriceUSD: 39.90,
+    priceUSD: 24.90,
+    price: 24.90,
+    tag: {
+      es: "⚡ PROMO -37%",
+      en: "⚡ PROMO -37%"
+    },
     image: "assets/nike-pro-shorts.png",
-    desc: "Shorts de entrenamiento 2 en 1 con calzón interno de compresión elástica y tecnología Dri-FIT para mantenerte fresco y seco.",
+    desc: {
+      es: "Shorts de entrenamiento 2 en 1 con calzón interno de compresión elástica y tecnología Dri-FIT para mantenerte fresco y seco.",
+      en: "2-in-1 workout shorts with compression liner and Dri-FIT sweat-wicking technology."
+    },
     variants: ["Talla S (30-31)", "Talla M (32-33)", "Talla L (34-35)", "Talla XL (36-38)"]
   },
   {
     id: "lululemon-leggings",
-    name: "Lululemon · Align High-Rise Sculpt Tights",
+    name: {
+      es: "Lululemon · Align High-Rise Sculpt Tights",
+      en: "Lululemon · Align High-Rise Sculpt Tights"
+    },
     brand: "Lululemon",
     category: "ropa",
-    priceUSD: 52.90,
-    price: 52.90,
-    tag: "PREMIUM FIT",
+    originalPriceUSD: 52.90,
+    priceUSD: 32.90,
+    price: 32.90,
+    tag: {
+      es: "🔥 PREMIUM -38%",
+      en: "🔥 PREMIUM -38%"
+    },
     image: "assets/lululemon-leggings.png",
-    desc: "Leggings de compresión media con tacto ultrasuave Nulu™, tiro alto moldeador y tejido a prueba de sentadillas profundas.",
+    desc: {
+      es: "Leggings de compresión media con tacto ultrasuave Nulu™, tiro alto moldeador y tejido a prueba de sentadillas profundas.",
+      en: "Buttery-soft Nulu™ fabric high-rise leggings. Squat-proof coverage and waist-sculpting band."
+    },
     variants: ["Talla XS (24-25)", "Talla S (26-27)", "Talla M (28-29)", "Talla L (30-32)"]
   },
   {
     id: "essential-tee",
-    name: "NEXA FIT · Essential Training Athletic Tee",
+    name: {
+      es: "NEXA FIT · Essential Training Athletic Tee",
+      en: "NEXA FIT · Essential Training Athletic Tee"
+    },
     brand: "NEXA FIT",
     category: "ropa",
-    priceUSD: 20.90,
-    price: 20.90,
-    tag: "TOP VENTAS",
+    originalPriceUSD: 20.90,
+    priceUSD: 12.90,
+    price: 12.90,
+    tag: {
+      es: "💥 LANZAMIENTO -38%",
+      en: "💥 LAUNCH DEAL -38%"
+    },
     image: "assets/essential-tee.png",
-    desc: "Algodón elástico ultra suave con corte atlético que ajusta el pecho y los brazos, ofreciendo máxima holgura al entrenar.",
+    desc: {
+      es: "Algodón elástico ultra suave con corte atlético que ajusta el pecho y los brazos, ofreciendo máxima holgura al entrenar.",
+      en: "Ultra-soft stretch cotton with athletic taper hugging chest and arms while keeping full mobility."
+    },
     variants: ["Talla S", "Talla M", "Talla L", "Talla XL"]
   },
   {
     id: "performance-shorts",
-    name: "NEXA FIT · Performance Shorts 7” con Forro",
+    name: {
+      es: "NEXA FIT · Performance Shorts 7” con Forro",
+      en: "NEXA FIT · Performance 7” Shorts with Liner"
+    },
     brand: "NEXA FIT",
     category: "ropa",
-    priceUSD: 26.90,
-    price: 26.90,
-    tag: "NUEVO",
+    originalPriceUSD: 26.90,
+    priceUSD: 15.90,
+    price: 15.90,
+    tag: {
+      es: "⚡ PROMO -40%",
+      en: "⚡ PROMO -40%"
+    },
     image: "assets/shorts.png",
-    desc: "Tejido elástico de secado ultra rápido con forro interior de compresión y bolsillo antideslizante para smartphone.",
+    desc: {
+      es: "Tejido elástico de secado ultra rápido con forro interior de compresión y bolsillo antideslizante para smartphone.",
+      en: "Quick-dry 7\" workout shorts with built-in compression liner and anti-bounce phone pocket."
+    },
     variants: ["Talla S", "Talla M", "Talla L", "Talla XL"]
   },
   {
     id: "seamless-leggings",
-    name: "NEXA FIT · Seamless Sculpt Leggings",
+    name: {
+      es: "NEXA FIT · Seamless Sculpt Leggings",
+      en: "NEXA FIT · Seamless Sculpt Leggings"
+    },
     brand: "NEXA FIT",
     category: "ropa",
-    priceUSD: 36.90,
-    price: 36.90,
-    tag: "POPULAR",
+    originalPriceUSD: 36.90,
+    priceUSD: 22.90,
+    price: 22.90,
+    tag: {
+      es: "🔥 POPULAR -38%",
+      en: "🔥 POPULAR -38%"
+    },
     image: "assets/leggings.png",
-    desc: "Tecnología sin costuras con pretina de compresión alta que moldea la cintura y tejido a prueba de sentadillas.",
+    desc: {
+      es: "Tecnología sin costuras con pretina de compresión alta que moldea la cintura y tejido a prueba de sentadillas.",
+      en: "Seamless knit technology with high-rise waist sculpting band and 100% squat-proof fabric."
+    },
     variants: ["Talla XS", "Talla S", "Talla M", "Talla L"]
   },
   {
     id: "oversized-hoodie",
-    name: "NEXA FIT · Oversized Rest Day Hoodie 420 GSM",
+    name: {
+      es: "NEXA FIT · Oversized Rest Day Hoodie 420 GSM",
+      en: "NEXA FIT · Oversized Rest Day Hoodie 420 GSM"
+    },
     brand: "NEXA FIT",
     category: "ropa",
-    priceUSD: 44.90,
-    price: 44.90,
-    tag: "PREMIUM",
+    originalPriceUSD: 44.90,
+    priceUSD: 27.90,
+    price: 27.90,
+    tag: {
+      es: "⚡ PREMIUM -37%",
+      en: "⚡ PREMIUM -37%"
+    },
     image: "assets/hoodie.png",
-    desc: "Algodón pesado perchado de 420 GSM para abrigar antes y después de cada sesión intensa. Ajuste holgado estético.",
-    variants: ["Talla S / M", "Talla L / XL"]
+    desc: {
+      es: "Algodón pesado perchado de 420 GSM para abrigar antes y después de cada sesión intensa. Ajuste holgado estético.",
+      en: "Heavyweight 420 GSM fleece-lined hoodie for pre and post-workout warmth. Aesthetic oversized fit."
+    },
+    variants: ["Talla S", "Talla M", "Talla L", "Talla XL"]
   }
 ];
 
@@ -358,6 +649,133 @@ function formatPEN(amount) {
   return formatPrice(amount);
 }
 
+function updatePageLanguage() {
+  const lang = getLang();
+  const dict = I18N_DICTIONARY[lang] || I18N_DICTIONARY.es;
+
+  // Announcement
+  const annEl = document.getElementById("announcementText");
+  if (annEl) {
+    annEl.innerHTML = `<span class="announcement-dot"></span> ${dict.announcement}`;
+  }
+
+  // Hamburger Menu
+  const menuBtnText = document.querySelector(".menu-btn-text");
+  if (menuBtnText) menuBtnText.textContent = dict.menu;
+
+  // Desktop Nav Links
+  const navLinks = document.querySelectorAll(".desktop-nav .nav-item-link");
+  navLinks.forEach(link => {
+    if (link.getAttribute("href") === "#shop" && !link.classList.contains("has-dropdown")) link.textContent = dict.nav_all;
+    else if (link.dataset.filterLink === "ropa") link.innerHTML = `${dict.nav_gym_wear} <span class="dropdown-arrow">▾</span>`;
+    else if (link.dataset.filterLink === "suplementos") link.innerHTML = `${dict.nav_supplements} <span class="dropdown-arrow">▾</span>`;
+    else if (link.getAttribute("href") === "#collections") link.textContent = dict.nav_collection_2026;
+  });
+
+  // Hero Section
+  const heroEyebrow = document.querySelector(".hero .eyebrow");
+  if (heroEyebrow) heroEyebrow.textContent = dict.hero_eyebrow;
+
+  const heroH1 = document.querySelector(".hero h1");
+  if (heroH1) heroH1.textContent = dict.hero_title;
+
+  const heroP = document.querySelector(".hero .hero-text");
+  if (heroP) heroP.textContent = dict.hero_text;
+
+  const heroBtns = document.querySelectorAll(".hero-actions a");
+  if (heroBtns.length >= 2) {
+    heroBtns[0].textContent = dict.btn_shop_clothing;
+    heroBtns[1].textContent = dict.btn_view_supplements;
+  }
+
+  // Athlete Badge
+  const badgeTitle = document.querySelector(".athlete-badge strong");
+  if (badgeTitle) badgeTitle.textContent = `✓ ${dict.certified_quality_title}`;
+
+  const badgeSub = document.querySelector(".athlete-badge small");
+  if (badgeSub) badgeSub.textContent = dict.certified_quality_sub;
+
+  // Value Proposition Cards (Below Hero)
+  const propTitles = document.querySelectorAll(".prop-card strong");
+  const propSubs = document.querySelectorAll(".prop-card small");
+  if (propTitles.length >= 4 && propSubs.length >= 4) {
+    propTitles[0].textContent = dict.certified_quality_title;
+    propSubs[0].textContent = dict.certified_quality_sub;
+    propTitles[1].textContent = dict.express_shipping_title;
+    propSubs[1].textContent = dict.express_shipping_sub;
+    propTitles[2].textContent = dict.secure_payment_title;
+    propSubs[2].textContent = dict.secure_payment_sub;
+    propTitles[3].textContent = dict.satisfaction_title;
+    propSubs[3].textContent = dict.satisfaction_sub;
+  }
+
+  // Section Head
+  const sectionTitle = document.querySelector(".section-head h2");
+  if (sectionTitle) sectionTitle.textContent = dict.official_catalog_title;
+
+  // Filter Chips
+  document.querySelectorAll(".filter-chip").forEach(chip => {
+    if (chip.dataset.filter === "todos") chip.textContent = dict.filter_all;
+    else if (chip.dataset.filter === "ropa") chip.textContent = dict.filter_clothing;
+    else if (chip.dataset.filter === "suplementos") chip.textContent = dict.filter_supplements;
+  });
+
+  // Track Button
+  const trackBtnText = document.querySelector(".track-btn-text");
+  if (trackBtnText) trackBtnText.textContent = dict.track_order;
+
+  // Cart Button
+  const cartBtnText = document.querySelector("#cartButton");
+  if (cartBtnText) {
+    const countSpan = document.getElementById("cartCount");
+    const count = countSpan ? countSpan.textContent : "0";
+    cartBtnText.innerHTML = `${dict.cart_bag} <span id="cartCount">${count}</span>`;
+  }
+
+  // Cart Drawer Title
+  const cartTitle = document.querySelector(".cart-drawer-head h3");
+  if (cartTitle) cartTitle.textContent = dict.shopping_bag_title;
+
+  // Checkout Button
+  if (checkoutButton) checkoutButton.textContent = dict.checkout_now_btn;
+
+  // Checkout Modal Header
+  const checkoutTitle = document.querySelector(".checkout-head h2");
+  if (checkoutTitle) checkoutTitle.textContent = dict.checkout_modal_title;
+
+  const checkoutSubtitle = document.querySelector(".checkout-subtitle");
+  if (checkoutSubtitle) checkoutSubtitle.textContent = dict.checkout_modal_subtitle;
+
+  // Contact Step Title
+  const contactStepHeader = document.querySelector("#checkoutForm h3");
+  if (contactStepHeader) contactStepHeader.textContent = dict.contact_step_title;
+
+  // Form Labels in Checkout
+  const formLabels = document.querySelectorAll("#checkoutForm label");
+  formLabels.forEach(lbl => {
+    const text = lbl.textContent.trim();
+    if (text.includes("Nombre Completo") || text.includes("Full Name")) lbl.innerHTML = `${dict.lbl_full_name} <span class="req">*</span>`;
+    else if (text.includes("Correo") || text.includes("Email")) lbl.innerHTML = `${dict.lbl_email} <span class="req">*</span>`;
+    else if (text.includes("Teléfono") || text.includes("Phone")) lbl.innerHTML = `${dict.lbl_phone} <span class="req">*</span>`;
+    else if (text.includes("Dirección") || text.includes("Address")) lbl.innerHTML = `${dict.lbl_address} <span class="req">*</span>`;
+    else if (text.includes("Ciudad") || text.includes("City")) lbl.innerHTML = `${dict.lbl_city} <span class="req">*</span>`;
+    else if (text.includes("Número de Tarjeta") || text.includes("Card Number")) lbl.innerHTML = `${dict.lbl_card_number} <span class="req">*</span>`;
+    else if (text.includes("Vencimiento") || text.includes("Expiration")) lbl.innerHTML = `${dict.lbl_exp_date} <span class="req">*</span>`;
+    else if (text.includes("CVV") || text.includes("CVC")) lbl.innerHTML = `${dict.lbl_cvv} <span class="req">*</span>`;
+    else if (text.includes("Titular") || text.includes("Cardholder")) lbl.innerHTML = `${dict.lbl_cardholder} <span class="req">*</span>`;
+  });
+
+  // Place Order Button
+  if (placeOrderButton) placeOrderButton.textContent = dict.complete_order_btn;
+
+  // Search Placeholders
+  const globalSearch = document.getElementById("globalSearch");
+  if (globalSearch) globalSearch.placeholder = dict.search_placeholder;
+
+  const drawerSearchInput = document.getElementById("drawerSearchInput");
+  if (drawerSearchInput) drawerSearchInput.placeholder = dict.search_placeholder;
+}
+
 function setCurrency(newCurrency) {
   if (!CURRENCIES[newCurrency]) return;
   state.currency = newCurrency;
@@ -373,13 +791,6 @@ function setCurrency(newCurrency) {
     opt.classList.toggle("active", opt.dataset.currency === newCurrency);
   });
 
-  // Actualizar barra de anuncios
-  const annEl = document.getElementById("announcementText");
-  if (annEl) {
-    const isPEN = newCurrency === "PEN";
-    annEl.innerHTML = `<span class="announcement-dot"></span> ENVÍOS A TODO EL MUNDO 🌎 · ENVÍO GRATIS ${isPEN ? 'DESDE S/ 199' : 'DESDE $50 USD'} · CAMBIOS HASTA 15 DÍAS`;
-  }
-
   // Sincronizar select de país en checkout
   const countrySelect = document.getElementById("checkoutCountry");
   if (countrySelect) {
@@ -391,13 +802,17 @@ function setCurrency(newCurrency) {
     else countrySelect.value = "US";
   }
 
+  // Actualizar idioma de la interfaz según la moneda elegida
+  updatePageLanguage();
+
   // Re-renderizar catálogo y carrito
   renderProducts();
   renderCart();
   if (checkoutModal && checkoutModal.classList.contains("active")) {
-    renderCheckout();
+    renderCheckoutSummary();
   }
-  showToast(`Moneda actualizada a ${CURRENCIES[newCurrency].name}`);
+  const lang = getLang();
+  showToast(lang === "en" ? `Currency set to ${CURRENCIES[newCurrency].name}` : `Moneda actualizada a ${CURRENCIES[newCurrency].name}`);
 }
 
 function showToast(message) {
@@ -428,16 +843,267 @@ function validateLuhn(cardNumber) {
   return sum % 10 === 0;
 }
 
-// Detección de franquicia
+// ==========================================================================
+// CONFIGURACIÓN Y DETECCIÓN INTELIGENTE DE FRANQUICIAS DE TARJETAS
+// ==========================================================================
+
+const CARD_BRAND_CONFIG = {
+  mastercard: {
+    name: "Mastercard",
+    theme: "card-theme-mastercard",
+    badgeClass: "badge-mastercard",
+    maxLength: 16,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-mastercard">
+        <svg viewBox="0 0 36 24" width="36" height="24" class="brand-svg">
+          <circle cx="13" cy="12" r="9" fill="#EB001B"/>
+          <circle cx="23" cy="12" r="9" fill="#F79E1B" fill-opacity="0.92"/>
+          <path d="M18 6.6a9 9 0 0 1 0 10.8 9 9 0 0 1 0-10.8z" fill="#FF5F00"/>
+        </svg>
+        <span class="brand-name-sub">Mastercard</span>
+      </div>
+    `,
+    badgeHtml: `
+      <svg viewBox="0 0 36 24" width="22" height="15" class="badge-svg">
+        <circle cx="13" cy="12" r="9" fill="#EB001B"/>
+        <circle cx="23" cy="12" r="9" fill="#F79E1B" fill-opacity="0.92"/>
+        <path d="M18 6.6a9 9 0 0 1 0 10.8 9 9 0 0 1 0-10.8z" fill="#FF5F00"/>
+      </svg>
+      <span class="brand-text">Mastercard</span>
+    `
+  },
+  visa: {
+    name: "Visa",
+    theme: "card-theme-visa",
+    badgeClass: "badge-visa",
+    maxLength: 16,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-visa">
+        <svg viewBox="0 0 44 24" width="44" height="24" class="brand-svg">
+          <text x="22" y="18" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-style="italic" font-size="18" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">VISA</text>
+        </svg>
+      </div>
+    `,
+    badgeHtml: `
+      <svg viewBox="0 0 38 18" width="28" height="14" class="badge-svg">
+        <text x="19" y="15" font-family="'Inter', Arial, sans-serif" font-weight="900" font-style="italic" font-size="15" fill="#00D2FF" text-anchor="middle" letter-spacing="1">VISA</text>
+      </svg>
+    `
+  },
+  amex: {
+    name: "American Express",
+    theme: "card-theme-amex",
+    badgeClass: "badge-amex",
+    maxLength: 15,
+    cvvLength: 4,
+    displayHtml: `
+      <div class="brand-logo-card brand-amex">
+        <svg viewBox="0 0 48 24" width="48" height="24" class="brand-svg">
+          <rect width="48" height="24" rx="4" fill="#006FCF"/>
+          <text x="24" y="16" font-family="'Inter', Arial, sans-serif" font-weight="900" font-size="11" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">AMEX</text>
+        </svg>
+      </div>
+    `,
+    badgeHtml: `
+      <svg viewBox="0 0 38 18" width="28" height="14" class="badge-svg">
+        <text x="19" y="14" font-family="'Inter', Arial, sans-serif" font-weight="900" font-size="11" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">AMEX</text>
+      </svg>
+    `
+  },
+  diners: {
+    name: "Diners Club",
+    theme: "card-theme-diners",
+    badgeClass: "badge-diners",
+    maxLength: 14,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-diners">
+        <svg viewBox="0 0 44 24" width="44" height="24" class="brand-svg">
+          <rect width="44" height="24" rx="4" fill="#0079BE"/>
+          <circle cx="22" cy="12" r="7.5" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+          <line x1="22" y1="4.5" x2="22" y2="19.5" stroke="#0079BE" stroke-width="2.5"/>
+        </svg>
+        <span class="brand-name-sub">Diners</span>
+      </div>
+    `,
+    badgeHtml: `
+      <svg viewBox="0 0 36 20" width="20" height="12" class="badge-svg">
+        <circle cx="18" cy="10" r="6" fill="none" stroke="#0079BE" stroke-width="2"/>
+        <line x1="18" y1="4" x2="18" y2="16" stroke="#ffffff" stroke-width="2"/>
+      </svg>
+      <span class="brand-text">Diners</span>
+    `
+  },
+  discover: {
+    name: "Discover",
+    theme: "card-theme-discover",
+    badgeClass: "badge-discover",
+    maxLength: 16,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-discover">
+        <svg viewBox="0 0 52 24" width="52" height="24" class="brand-svg">
+          <rect width="52" height="24" rx="4" fill="#1b1c20"/>
+          <text x="14" y="16" font-family="'Inter', Arial, sans-serif" font-weight="900" font-size="8.5" fill="#FFFFFF" text-anchor="middle">DISC</text>
+          <circle cx="26" cy="12" r="4.2" fill="#FF6000"/>
+          <text x="38" y="16" font-family="'Inter', Arial, sans-serif" font-weight="900" font-size="8.5" fill="#FFFFFF" text-anchor="middle">VER</text>
+        </svg>
+      </div>
+    `,
+    badgeHtml: `
+      <svg viewBox="0 0 36 20" width="20" height="12" class="badge-svg">
+        <rect width="36" height="20" rx="3" fill="#FF6000"/>
+        <text x="18" y="14" font-family="'Inter', Arial, sans-serif" font-weight="900" font-size="8" fill="#FFFFFF" text-anchor="middle">DISC</text>
+      </svg>
+      <span class="brand-text">Discover</span>
+    `
+  },
+  jcb: {
+    name: "JCB",
+    theme: "card-theme-jcb",
+    badgeClass: "badge-jcb",
+    maxLength: 16,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-jcb">
+        <svg viewBox="0 0 40 24" width="40" height="24" class="brand-svg">
+          <rect x="2" y="3" width="10.5" height="18" rx="2.5" fill="#007940"/>
+          <rect x="14.5" y="3" width="10.5" height="18" rx="2.5" fill="#E60012"/>
+          <rect x="27" y="3" width="10.5" height="18" rx="2.5" fill="#0066B3"/>
+          <text x="7.2" y="16" font-weight="900" font-size="9" fill="#FFF" text-anchor="middle">J</text>
+          <text x="19.7" y="16" font-weight="900" font-size="9" fill="#FFF" text-anchor="middle">C</text>
+          <text x="32.2" y="16" font-weight="900" font-size="9" fill="#FFF" text-anchor="middle">B</text>
+        </svg>
+      </div>
+    `,
+    badgeHtml: `
+      <span class="brand-text">JCB</span>
+    `
+  },
+  unionpay: {
+    name: "UnionPay",
+    theme: "card-theme-default",
+    badgeClass: "badge-default",
+    maxLength: 19,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-default">
+        <span class="brand-name-sub" style="color: #ff3b5c;">UnionPay</span>
+      </div>
+    `,
+    badgeHtml: `<span class="brand-text">UnionPay</span>`
+  },
+  maestro: {
+    name: "Maestro",
+    theme: "card-theme-mastercard",
+    badgeClass: "badge-mastercard",
+    maxLength: 19,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-mastercard">
+        <svg viewBox="0 0 36 24" width="36" height="24" class="brand-svg">
+          <circle cx="13" cy="12" r="9" fill="#EB001B"/>
+          <circle cx="23" cy="12" r="9" fill="#0066B3" fill-opacity="0.92"/>
+        </svg>
+        <span class="brand-name-sub">Maestro</span>
+      </div>
+    `,
+    badgeHtml: `<span class="brand-text">Maestro</span>`
+  },
+  tarjeta: {
+    name: "Tarjeta",
+    theme: "card-theme-default",
+    badgeClass: "badge-default",
+    maxLength: 16,
+    cvvLength: 3,
+    displayHtml: `
+      <div class="brand-logo-card brand-default">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <line x1="2" y1="10" x2="22" y2="10"/>
+        </svg>
+        <span class="brand-name-sub">TARJETA</span>
+      </div>
+    `,
+    badgeHtml: `
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="5" width="20" height="14" rx="2"/>
+        <line x1="2" y1="10" x2="22" y2="10"/>
+      </svg>
+      <span class="brand-text">TARJETA</span>
+    `
+  }
+};
+
+// Detección inteligente en tiempo real de franquicia
 function detectCardBrand(number) {
-  const clean = number.replace(/\D/g, "");
+  const clean = String(number || "").replace(/\D/g, "");
+  if (!clean) return "tarjeta";
   if (/^4/.test(clean)) return "visa";
   if (/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[0-1]|2720)/.test(clean)) return "mastercard";
+  if (clean.length === 1 && clean === "5") return "mastercard";
+  if (clean.length >= 1 && /^2[2-7]/.test(clean)) return "mastercard";
   if (/^3[47]/.test(clean)) return "amex";
-  if (/^3(?:0[0-5]|[68])/.test(clean)) return "diners";
-  if (/^6(?:011|5)/.test(clean)) return "discover";
-  if (/^35/.test(clean)) return "jcb";
+  if (/^3(?:0[0-5]|[689]|095)/.test(clean)) return "diners";
+  if (/^(?:2131|1800|35)/.test(clean)) return "jcb";
+  if (/^(6011|65|64[4-9]|622)/.test(clean)) return "discover";
+  if (/^(50|5[6-8]|67)/.test(clean)) return "maestro";
+  if (/^(62|81)/.test(clean)) return "unionpay";
+  if (clean.length === 1 && clean === "6") return "discover";
   return "tarjeta";
+}
+
+// Formateo visual dinámico según tipo de tarjeta (Amex 4-6-5, Diners 4-6-4, Standard 4-4-4-4)
+function formatCardNumber(value, brand) {
+  const clean = String(value || "").replace(/\D/g, "");
+  if (brand === "amex") {
+    return clean.replace(/^(\d{4})(\d{0,6})(\d{0,5}).*/, (_, a, b, c) => [a, b, c].filter(Boolean).join(" "));
+  } else if (brand === "diners" && clean.length <= 14) {
+    return clean.replace(/^(\d{4})(\d{0,6})(\d{0,4}).*/, (_, a, b, c) => [a, b, c].filter(Boolean).join(" "));
+  } else {
+    return clean.replace(/(.{4})/g, "$1 ").trim();
+  }
+}
+
+// Sincronización y actualización visual reactiva de la tarjeta 3D y badges
+function updateCardBrandUI(brandKey) {
+  const config = CARD_BRAND_CONFIG[brandKey] || CARD_BRAND_CONFIG.tarjeta;
+
+  if (cardBrandDisplay) {
+    cardBrandDisplay.innerHTML = config.displayHtml;
+  }
+
+  if (creditCard3D) {
+    creditCard3D.className = `interactive-card ${config.theme}`;
+  }
+
+  if (cardBrandBadge) {
+    cardBrandBadge.className = `card-brand-badge ${config.badgeClass}`;
+    cardBrandBadge.innerHTML = config.badgeHtml;
+  }
+
+  const pills = document.querySelectorAll(".accepted-card-pill");
+  pills.forEach((pill) => {
+    if (brandKey !== "tarjeta") {
+      if (pill.dataset.brand === brandKey) {
+        pill.classList.add("active-pill");
+        pill.classList.remove("dimmed-pill");
+      } else {
+        pill.classList.remove("active-pill");
+        pill.classList.add("dimmed-pill");
+      }
+    } else {
+      pill.classList.remove("active-pill");
+      pill.classList.remove("dimmed-pill");
+    }
+  });
+
+  if (cardCvcInput) {
+    cardCvcInput.maxLength = config.cvvLength;
+    cardCvcInput.placeholder = config.cvvLength === 4 ? "1234" : "123";
+  }
 }
 
 // ==========================================================================
@@ -479,26 +1145,40 @@ function renderProducts() {
 
   productGrid.innerHTML = list
     .map(
-      (product, idx) => `
-      <article class="product-card reveal-item is-revealed" style="animation: fadeIn 0.35s ease both; animation-delay: ${idx * 0.04}s;">
+      (product) => {
+        const origPriceFormatted = product.originalPriceUSD ? formatPEN(product.originalPriceUSD) : null;
+        const currentPriceFormatted = formatPEN(product.price);
+        const nameText = getBilingualText(product.name);
+        const descText = getBilingualText(product.desc);
+        const tagText = getBilingualText(product.tag);
+        const lang = getLang();
+        const quickViewText = lang === "en" ? "👁️ QUICK VIEW" : "👁️ VISTA RÁPIDA";
+        const addBtnText = lang === "en" ? "+ ADD TO BAG" : "+ AGREGAR";
+
+        return `
+      <article class="product-card">
         <div class="product-media">
-          <span class="product-tag">${product.tag}</span>
-          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <span class="product-tag">${tagText}</span>
+          <img src="${product.image}" alt="${nameText}" loading="lazy" decoding="async" width="300" height="300" onload="this.parentElement.classList.add('loaded')">
           <button class="quick-view-btn" data-quickview-id="${product.id}">
-            👁️ VISTA RÁPIDA
+            ${quickViewText}
           </button>
         </div>
         <div class="product-info">
           <span class="product-category">${product.brand ? `${product.brand.toUpperCase()} · ` : ''}${product.category.toUpperCase()}</span>
-          <h3 class="product-name">${product.name}</h3>
-          <p class="product-desc">${product.desc}</p>
+          <h3 class="product-name">${nameText}</h3>
+          <p class="product-desc">${descText}</p>
           <div class="product-bottom">
-            <span class="product-price">${formatPEN(product.price)}</span>
-            <button class="quick-add-btn" data-add-id="${product.id}">+ AGREGAR</button>
+            <div class="product-price-box">
+              ${origPriceFormatted ? `<span class="product-orig-price">${origPriceFormatted}</span>` : ''}
+              <span class="product-price">${currentPriceFormatted}</span>
+            </div>
+            <button class="quick-add-btn" data-add-id="${product.id}">${addBtnText}</button>
           </div>
         </div>
       </article>
-    `
+    `;
+      }
     )
     .join("");
 }
@@ -652,6 +1332,7 @@ function openCheckout() {
   }
   closeDrawer();
   renderCheckoutSummary();
+  updateCardBrandUI(detectCardBrand(cardNumberInput ? cardNumberInput.value : ""));
   checkoutModal.setAttribute("aria-hidden", "false");
   checkoutModal.classList.add("active");
   overlay.setAttribute("aria-hidden", "false");
@@ -866,29 +1547,35 @@ if (creditCard3D) {
   });
 }
 
-// Formateo en tiempo real del número de tarjeta
+// Formateo y detección inteligente en tiempo real del número de tarjeta
 if (cardNumberInput) {
   cardNumberInput.addEventListener("input", (e) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 16) value = value.slice(0, 16);
+    let rawValue = e.target.value.replace(/\D/g, "");
+    const brand = detectCardBrand(rawValue);
+    const config = CARD_BRAND_CONFIG[brand] || CARD_BRAND_CONFIG.tarjeta;
 
-    const formatted = value.replace(/(.{4})/g, "$1 ").trim();
+    if (rawValue.length > config.maxLength) {
+      rawValue = rawValue.slice(0, config.maxLength);
+    }
+
+    const formatted = formatCardNumber(rawValue, brand);
     e.target.value = formatted;
 
-    const brand = detectCardBrand(value);
-    const brandName = brand.toUpperCase();
-    cardBrandBadge.textContent = brandName;
-    cardBrandDisplay.textContent = brandName;
+    updateCardBrandUI(brand);
 
-    if (value.length > 0) {
-      cardNumberDisplay.textContent = formatted.padEnd(19, "•");
-    } else {
-      cardNumberDisplay.textContent = "•••• •••• •••• ••••";
+    if (cardNumberDisplay) {
+      if (rawValue.length > 0) {
+        const mask = brand === "amex" ? "•••• •••••• •••••" : (brand === "diners" ? "•••• •••••• ••••" : "•••• •••• •••• ••••");
+        cardNumberDisplay.textContent = formatted.padEnd(mask.length, "•");
+      } else {
+        cardNumberDisplay.textContent = brand === "amex" ? "•••• •••••• •••••" : (brand === "diners" ? "•••• •••••• ••••" : "•••• •••• •••• ••••");
+      }
     }
 
     // Validación visual de Luhn mientras se escribe
-    if (value.length >= 15) {
-      if (validateLuhn(value)) {
+    const minLen = brand === "diners" ? 14 : (brand === "amex" ? 15 : 16);
+    if (rawValue.length >= minLen) {
+      if (validateLuhn(rawValue)) {
         cardNumberInput.style.borderColor = "var(--success)";
       } else {
         cardNumberInput.style.borderColor = "var(--danger)";
